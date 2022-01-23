@@ -1,4 +1,4 @@
-const buildURLParams = (params?: any): URLSearchParams => {
+const buildURLParams = (params: any = {}): URLSearchParams => {
   const searchParams = new URLSearchParams();
   searchParams.append('api_key', process.env.REACT_APP_API_KEY!);
   Object.keys(params).forEach(paramKey => searchParams.append(paramKey, params[paramKey]));
@@ -28,5 +28,8 @@ export const API = {
   },
   PRODUCTION_COMPANIES: {
     search: (query: string) => get('search/company', { query })
+  },
+  GENRES: {
+    all: () => get('genre/movie/list')
   }
 };
