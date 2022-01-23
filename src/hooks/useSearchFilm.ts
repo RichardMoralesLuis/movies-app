@@ -17,9 +17,9 @@ export const useSearchFilm = (query: string): UseSearchFilmResult => {
   useEffect(() => {
     const doSearchRequests = async () => {
       setIsSearching(true);
-      const { results: movies }: any = await API.MOVIES.search(query);
-      const { results: casts }: any = await API.CASTS.search(query);
-      const { results: productionCompanies }: any = await API.PRODUCTION_COMPANIES.search(query);
+      const movies: any = await API.MOVIES.search(query);
+      const casts: any = await API.CASTS.search(query);
+      const productionCompanies: any = await API.PRODUCTION_COMPANIES.search(query);
       setMovies(movies);
       setCasts(casts);
       setProductionCompanies(productionCompanies);
