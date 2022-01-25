@@ -8,7 +8,7 @@ interface UseSearchFilmResult {
   productionCompanies: any;
 }
 
-export const useSearchFilm = (query: string): UseSearchFilmResult => {
+export const useSearch = (query: string): UseSearchFilmResult => {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [movies, setMovies] = useState([]);
   const [casts, setCasts] = useState([]);
@@ -17,9 +17,9 @@ export const useSearchFilm = (query: string): UseSearchFilmResult => {
   useEffect(() => {
     const doSearchRequests = async () => {
       setIsSearching(true);
-      const movies: any = await API.MOVIES.search(query);
-      const casts: any = await API.CASTS.search(query);
-      const productionCompanies: any = await API.PRODUCTION_COMPANIES.search(query);
+      const { results: movies }: any = await API.MOVIES.search(query);
+      const { results: casts }: any = await API.CASTS.search(query);
+      const { results: productionCompanies }: any = await API.PRODUCTION_COMPANIES.search(query);
       setMovies(movies);
       setCasts(casts);
       setProductionCompanies(productionCompanies);
