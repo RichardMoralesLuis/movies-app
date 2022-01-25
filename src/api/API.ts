@@ -31,5 +31,8 @@ export const API = {
   },
   GENRES: {
     all: () => get('genre/movie/list')
+  },
+  DISCOVER: {
+    filter: (params: any) => get('discover/movie', params)
   }
 };

@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
 import { Search } from '../components/Search';
-import { useSearchFilm } from '../hooks/useSearchFilm';
+import { useSearch } from '../hooks/useSearch';
 import { useNavigate } from 'react-router-dom';
 
 export const Home: FC = () => {
   const [nameToSearch, setNameToSearch] = useState('');
-  const { isSearching, movies, casts, productionCompanies } = useSearchFilm(nameToSearch);
+  const { isSearching, movies, casts, productionCompanies } = useSearch(nameToSearch);
   const navigate = useNavigate();
 
   const handleSearch = (movieName: string) => setNameToSearch(movieName);
