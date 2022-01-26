@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import React, { FC } from 'react';
 import { List } from '@mui/material';
 import { SearchResultSections } from './SearchResultSections';
-import { SearchMovieResult } from '../../api/search/model';
 
 const Container = styled.div`
   width: 260px;
@@ -16,22 +15,20 @@ export type SearchSections = 'Movies' | 'Casts' | 'Companies';
 
 interface ResultSections {
   totalCasts: number;
-  productionCompanies: any;
+  totalCompanies: any;
   totalMovies: number;
   onSelect: (section: SearchSections) => void;
   selectedSection: SearchSections;
 }
 
-export const ResultsSections: FC<ResultSections> = ({ totalMovies, totalCasts, productionCompanies, onSelect, selectedSection }) => {
-  const numberOfCompanies = productionCompanies.length;
-
+export const ResultsSections: FC<ResultSections> = ({ totalMovies, totalCasts, totalCompanies, onSelect, selectedSection }) => {
   const handleSelect = (section: SearchSections) => onSelect(section);
 
   return <Container>
     <List sx={{ width: '100%', padding: '8px 0' }}>
       <SearchResultSections section="Movies" numberOfResults={totalMovies} selectedSection={selectedSection} onSelect={handleSelect}/>
       <SearchResultSections section="Casts" numberOfResults={totalCasts} selectedSection={selectedSection} onSelect={handleSelect}/>
-      <SearchResultSections section="Companies" numberOfResults={numberOfCompanies} selectedSection={selectedSection} onSelect={handleSelect}/>
+      <SearchResultSections section="Companies" numberOfResults={totalCompanies} selectedSection={selectedSection} onSelect={handleSelect}/>
     </List>
   </Container>;
 };

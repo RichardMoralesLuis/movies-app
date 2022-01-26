@@ -1,7 +1,8 @@
 import { MoviesResult } from './movies/models';
 import { toMovies } from './movies/parser';
-import { SearchCastResult, SearchMovieResult } from './search/model';
-import { toSearchCasts, toSearchMovies } from './search/parse';
+import { SearchCastResult, SearchCompanyResult, SearchMovieResult } from './search/model';
+import { toSearchCasts, toSearchCompanies, toSearchMovies } from './search/parse';
+import { toCompanies } from './companies/parser';
 
 const buildURLParams = (params: any = {}): URLSearchParams => {
   const searchParams = new URLSearchParams();
@@ -33,7 +34,7 @@ export const API = {
     search: (query: string, page = 1) => get<SearchCastResult>('search/person', { query, page }, toSearchCasts)
   },
   PRODUCTION_COMPANIES: {
-    search: (query: string, page = 1) => get('search/company', { query, page })
+    search: (query: string, page = 1) => get<SearchCompanyResult>('search/company', { query, page }, toSearchCompanies)
   },
   GENRES: {
     all: () => get('genre/movie/list')

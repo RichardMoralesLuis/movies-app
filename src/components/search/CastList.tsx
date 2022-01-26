@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { List } from '@mui/material';
-import { Cast } from '../../api/cast/model';
-import { CastItem } from './Cast';
+import { CastModel } from '../../api/cast/model';
+import { CastItem } from './CastItem';
 
 interface CastListProps {
-  casts: Cast[];
+  casts: CastModel[];
 }
 
 export const CastList: FC<CastListProps> = ({ casts }) => {
