@@ -10,11 +10,11 @@ const Container = styled.div`
   overflow-y: scroll;
 `;
 
-interface PopularMoviesProps {
+interface MoviesProps {
   movies: MovieModel[];
 }
 
-export const PopularMovies: FC<PopularMoviesProps> = ({ movies }) => {
+export const MoviesCarrousel: FC<MoviesProps> = ({ movies }) => {
 
   return <Container>
     {movies.map(movie => <Movie movie={movie} key={movie.id}/>)}

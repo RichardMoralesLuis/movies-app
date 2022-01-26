@@ -9,6 +9,7 @@ export interface MovieAPI {
     genre_ids: number[];
     id: number;
     poster_path?: string;
+    backdrop_path?: string;
     video: boolean;
     overview: string;
 }
@@ -20,6 +21,7 @@ export interface MovieModel {
   posterPath?: string;
   video: boolean;
   overview: string;
+  backdropPath?: string;
 }
 
 export interface MoviesResult {

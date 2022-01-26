@@ -1,11 +1,12 @@
 import { MovieModel, MovieAPI, MoviesApiResponse, MoviesResult } from './models';
 
 const toMovie = (movie: MovieAPI): MovieModel => {
-  const { poster_path, genre_ids } = movie;
+  const { poster_path, genre_ids, backdrop_path } = movie;
   return {
     ...movie,
     posterPath: poster_path,
-    genres: genre_ids
+    genres: genre_ids,
+    backdropPath: backdrop_path
   };
 };
 

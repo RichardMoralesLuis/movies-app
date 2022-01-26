@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Search } from '../components/filters/Search';
 import { useNavigate } from 'react-router-dom';
 import { usePopularFilms } from '../hooks/usePopularFilms';
-import { PopularMovies } from '../components/movies/PopularMovies';
+import { MoviesCarrousel } from '../components/movies/MoviesCarrousel';
 import styled from '@emotion/styled';
 import { NavBar } from '../components/navbar/Navbar';
 
@@ -23,7 +23,7 @@ export const Home: FC = () => {
   return <Container>
     <NavBar/>
     <Search onSearch={handleSearch}/>
-    <PopularMovies movies={popularMovies}/>
+    <MoviesCarrousel movies={popularMovies}/>
     {/*<button onClick={handleShowMorePopularFilms}>Show more films</button>*/}
   </Container>;
 };
