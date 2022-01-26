@@ -1,5 +1,6 @@
-import { SearchMovieResult, SearchMovieResultAPI } from './model';
+import { SearchCastResult, SearchCastResultAPI, SearchMovieResult, SearchMovieResultAPI } from './model';
 import { toMovies } from '../movies/parser';
+import { toCasts } from '../cast/parser';
 
 export const toSearchMovies = (response: SearchMovieResultAPI): SearchMovieResult => {
   const { total_results } = response;
@@ -11,12 +12,12 @@ export const toSearchMovies = (response: SearchMovieResultAPI): SearchMovieResul
   };
 };
 
-export const toSearchCasts = (response: SearchMovieResultAPI): SearchMovieResult => {
+export const toSearchCasts = (response: SearchCastResultAPI): SearchCastResult => {
   const { total_results } = response;
-  const movies = toMovies(response);
+  const casts = toCasts(response);
 
   return {
-    ...movies,
+    ...casts,
     totalResults: total_results
   };
 };

@@ -15,23 +15,22 @@ const Container = styled.div`
 export type SearchSections = 'Movies' | 'Casts' | 'Companies';
 
 interface ResultSections {
-  casts: any;
+  totalCasts: number;
   productionCompanies: any;
-  movies: number;
+  totalMovies: number;
   onSelect: (section: SearchSections) => void;
   selectedSection: SearchSections;
 }
 
-export const ResultsSections: FC<ResultSections> = ({ movies, casts, productionCompanies, onSelect, selectedSection }) => {
-  const numberOfCasts = casts.length;
+export const ResultsSections: FC<ResultSections> = ({ totalMovies, totalCasts, productionCompanies, onSelect, selectedSection }) => {
   const numberOfCompanies = productionCompanies.length;
 
   const handleSelect = (section: SearchSections) => onSelect(section);
 
   return <Container>
     <List sx={{ width: '100%', padding: '8px 0' }}>
-      <SearchResultSections section="Movies" numberOfResults={movies} selectedSection={selectedSection} onSelect={handleSelect}/>
-      <SearchResultSections section="Casts" numberOfResults={numberOfCasts} selectedSection={selectedSection} onSelect={handleSelect}/>
+      <SearchResultSections section="Movies" numberOfResults={totalMovies} selectedSection={selectedSection} onSelect={handleSelect}/>
+      <SearchResultSections section="Casts" numberOfResults={totalCasts} selectedSection={selectedSection} onSelect={handleSelect}/>
       <SearchResultSections section="Companies" numberOfResults={numberOfCompanies} selectedSection={selectedSection} onSelect={handleSelect}/>
     </List>
   </Container>;
