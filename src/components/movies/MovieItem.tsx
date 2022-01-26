@@ -3,6 +3,7 @@ import { MovieModel } from '../../api/movies/models';
 import { ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { DEFAULT_IMAGE_PATH } from './Movie';
 import styled from '@emotion/styled';
+import { itemListStyle } from '../search/utils';
 
 const Image = styled.img`
   max-height: 150px;
@@ -23,11 +24,11 @@ const itemStyle = {
   boxShadow: '0 2px 8px rgb(0 0 0 / 10%)'
 };
 
-export const MovieResult: FC<MovieResultProps> = ({ movie }) => {
+export const MovieItem: FC<MovieResultProps> = ({ movie }) => {
   const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${movie.posterPath}`;
   const source = movie.posterPath ? imagePath : DEFAULT_IMAGE_PATH;
 
-  return <ListItem alignItems="flex-start" style={itemStyle}>
+  return <ListItem alignItems="flex-start" style={itemListStyle}>
     <ListItemAvatar>
       <Image src={source}/>
     </ListItemAvatar>

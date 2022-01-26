@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { SearchSections } from './ResultsSections';
 import { MoviesList } from '../movies/MoviesList';
 import { MovieModel } from '../../api/movies/models';
+import { CastList } from './CastList';
 
 interface SectionsProps {
   selectedSection: SearchSections;
@@ -17,7 +18,7 @@ export const Sections: FC<SectionsProps> = ({ selectedSection, movies, casts, pr
   }
 
   if (selectedSection === 'Casts') {
-    return null;
+    return <CastList casts={casts}/>;
   }
 
   if (selectedSection === 'Companies') {
