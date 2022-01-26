@@ -1,27 +1,27 @@
 import React, { FC } from 'react';
 import { ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
-import styled from '@emotion/styled';
-import { Cast } from '../../api/cast/model';
-import { DEFAULT_IMAGE_PATH } from '../movies/Movie';
 import { itemListStyle } from './utils';
+import { CompanyModel } from '../../api/companies/models';
+import styled from '@emotion/styled';
 
 const Image = styled.img`
   max-height: 150px;
   margin-right: 18px;
 `;
 
-interface MovieResultProps {
-  cast: Cast;
+interface CompanyItemProps {
+  company: CompanyModel;
 }
 
-export const CastItem: FC<MovieResultProps> = ({ cast }) => {
-  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${cast.profilePath}`;
-  const source = cast.profilePath ? imagePath : DEFAULT_IMAGE_PATH;
+export const CompanyItem: FC<CompanyItemProps> = ({ company }) => {
+  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${company.logoPath}`;
 
   return <ListItem alignItems="flex-start" style={itemListStyle}>
-    <ListItemAvatar>
-      <Image src={source}/>
-    </ListItemAvatar>
+    {company.logoPath ?
+      <ListItemAvatar>
+        <Image src={imagePath}/>
+      </ListItemAvatar>
+      : null}
     <ListItemText
       primary={<>
         <Typography
@@ -31,7 +31,7 @@ export const CastItem: FC<MovieResultProps> = ({ cast }) => {
           variant="body1"
           color="text.primary"
         >
-          {cast.name}
+          {company.name}
         </Typography>
       </>}
     />

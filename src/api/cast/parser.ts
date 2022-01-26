@@ -1,6 +1,6 @@
-import { Cast, CastAPI, CastAPIResponse, CastModel } from './model';
+import { CastAPI, CastAPIResponse, CastModel, CastResult } from './model';
 
-const toCast = (cast: CastAPI): Cast => {
+const toCast = (cast: CastAPI): CastModel => {
   const { profile_path } = cast;
   return {
     ...cast,
@@ -8,7 +8,7 @@ const toCast = (cast: CastAPI): Cast => {
   };
 };
 
-export const toCasts = (moviesResponse: CastAPIResponse): CastModel => {
+export const toCasts = (moviesResponse: CastAPIResponse): CastResult => {
   const { results, total_pages, page } = moviesResponse;
 
   return {

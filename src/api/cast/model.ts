@@ -1,7 +1,7 @@
 export interface CastAPI {
   id: number;
   profile_path?: string;
-  name:string;
+  name: string;
 }
 
 export interface CastAPIResponse {
@@ -10,14 +10,14 @@ export interface CastAPIResponse {
   total_pages: number;
 }
 
-export interface Cast {
+export interface CastModel {
   id: number;
   profilePath?: string;
   name: string;
 }
 
-export interface CastModel {
-  casts: Cast[];
+export interface CastResult {
+  casts: CastModel[];
   page: number;
   totalPages: number;
 }

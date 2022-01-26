@@ -3,15 +3,18 @@ import { SearchSections } from './ResultsSections';
 import { MoviesList } from '../movies/MoviesList';
 import { MovieModel } from '../../api/movies/models';
 import { CastList } from './CastList';
+import { CompaniesList } from './CompaniesList';
+import { CastModel } from '../../api/cast/model';
+import { CompanyModel } from '../../api/companies/models';
 
 interface SectionsProps {
   selectedSection: SearchSections;
   movies: MovieModel[];
-  casts: any;
-  productionCompanies: any;
+  casts: CastModel[];
+  companies: CompanyModel[];
 }
 
-export const Sections: FC<SectionsProps> = ({ selectedSection, movies, casts, productionCompanies }) => {
+export const Sections: FC<SectionsProps> = ({ selectedSection, movies, casts, companies }) => {
 
   if (selectedSection === 'Movies') {
     return <MoviesList movies={movies}/>;
@@ -22,7 +25,7 @@ export const Sections: FC<SectionsProps> = ({ selectedSection, movies, casts, pr
   }
 
   if (selectedSection === 'Companies') {
-    return null;
+    return <CompaniesList companiesList={companies}/>;
   }
 
   return null;
