@@ -1,5 +1,7 @@
-import { MovieModel, MoviesResult } from './movies/models';
+import { MoviesResult } from './movies/models';
 import { toMovies } from './movies/parser';
+import { SearchMovieResult } from './search/model';
+import { toSearchMovies } from './search/parse';
 
 const buildURLParams = (params: any = {}): URLSearchParams => {
   const searchParams = new URLSearchParams();
@@ -25,7 +27,7 @@ const get = async <T>(path: string, params?: any, parser?: any): Promise<T> => {
 export const API = {
   MOVIES: {
     popular: (page: number = 1) => get<MoviesResult>('movie/popular', { page }, toMovies),
-    search: (query: string, page = 1) => get('search/movie', { query, page }, toMovies)
+    search: (query: string, page = 1) => get<SearchMovieResult>('search/movie', { query, page }, toSearchMovies)
   },
   CASTS: {
     search: (query: string, page = 1) => get('search/person', { query, page })
