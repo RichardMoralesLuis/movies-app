@@ -3,10 +3,10 @@ import { useLoadGenres } from '../hooks/useLoadGenres';
 import { GenresSelector } from '../components/select/GenresSelector';
 import styled from '@emotion/styled';
 import { useFilter } from '../hooks/useFilter';
-import { RatingSlide } from '../components/RatingSlide';
+import { RatingSlide } from '../components/filters/RatingSlide';
+import { NavBar } from '../components/navbar/Navbar';
 
 const Container = styled.div`
-  max-width: 500px;
 `;
 
 export const DiscoverMovies: FC = () => {
@@ -20,6 +20,7 @@ export const DiscoverMovies: FC = () => {
   }
 
   return <Container>
+    <NavBar/>
     <GenresSelector genres={genres} selectedGenres={filters.genres} onSelectGenres={handleChangeGenres}/>
     <input type="date" name="minimum-release-date" onChange={handleChangeReleaseDate}/>
     <RatingSlide value={filters.rating} onChange={handleChangeRating}/>
