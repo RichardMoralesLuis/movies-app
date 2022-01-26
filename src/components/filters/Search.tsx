@@ -10,10 +10,11 @@ const Container = styled.div`
 
 interface SearchProps {
   onSearch: (value: string) => void;
+  defaultValue?: string;
 }
 
-export const Search: FC<SearchProps> = ({ onSearch }) => {
-  const [searchValue, setSearchValue] = useState<string>();
+export const Search: FC<SearchProps> = ({ onSearch, defaultValue }) => {
+  const [searchValue, setSearchValue] = useState<string>(defaultValue ?? '');
 
   const handleChangeValue = (event: ChangeEvent<HTMLInputElement>) => setSearchValue(event.target.value);
 
