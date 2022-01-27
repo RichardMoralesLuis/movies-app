@@ -8,6 +8,7 @@ import { NavBar } from '../components/navbar/Navbar';
 import { Button, Typography } from '@mui/material';
 import { FilterDatePicker } from '../components/filters/FilterDatePicker';
 import { MoviesList } from '../components/movies/MoviesList';
+import { usePopularFilms } from '../hooks/usePopularFilms';
 
 const Container = styled.div`
   display: grid;
@@ -36,11 +37,14 @@ const Filters = styled.div`
 export const DiscoverMovies: FC = () => {
   const { genres, isLoadingGenres } = useLoadGenres();
   const { movies, handleFilter, handleChangeGenres, handleChangeReleaseDate, filters, isFiltering, handleChangeRating } = useFilter();
+  const { popularMovies } = usePopularFilms();
 
 
   if (isLoadingGenres || isFiltering) {
     return <div>Loading...</div>;
   }
+
+  const moviesToShow = movies ? movies : popularMovies;
 
   return <>
     <NavBar/>
@@ -60,7 +64,7 @@ export const DiscoverMovies: FC = () => {
         </Filters>
       </FiltersContainer>
       <div>
-        <MoviesList movies={movies} onUpdateMovies={() => console.log('update')} searchInformation={{ totalPages: 1 } as any}/>
+        <MoviesList movies={moviesToShow} onUpdateMovies={() => console.log('update')} searchInformation={{ totalPages: 1 } as any}/>
       </div>
     </Container>
   </>;

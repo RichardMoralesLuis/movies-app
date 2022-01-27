@@ -55,7 +55,7 @@ const toFilterParams = (filters: Filters) => {
 export const useFilter = (): UseFilterResponse => {
   const [filters, setFilter] = useState<Filters>({});
   const [isFiltering, setIsFiltering] = useState(false);
-  const [movies, setMovies] = useState<MovieModel[]>([]);
+  const [movies, setMovies] = useState<MovieModel[] | undefined>();
 
   const handleChangeGenres = (genres: string[]) => setFilter({ ...filters, genres: genres as any });
   const handleChangeRating = (rating: number[]) => setFilter({ ...filters, rating: rating });
