@@ -23,7 +23,6 @@ export const Home: FC = () => {
   return <Container>
     <NavBar/>
     <Search onSearch={handleSearch}/>
-    <MoviesCarrousel movies={popularMovies}/>
-    {/*<button onClick={handleShowMorePopularFilms}>Show more films</button>*/}
+    <MoviesCarrousel movies={popularMovies} onUpdateMovies={handleShowMorePopularFilms}/>
   </Container>;
 };

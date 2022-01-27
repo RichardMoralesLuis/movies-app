@@ -16,22 +16,22 @@ export const usePopularFilms = (): UsePopularFilmsResult => {
 
   useEffect(() => {
     const handleRequestPopularFilms = async () => {
+      setIsLoading(true);
       const { movies: popularFilms, page, totalPages } = await API.MOVIES.popular();
       setPopularMovies(popularFilms);
       setLastPage(page);
       setIsMoreEnable(lastPage <= totalPages);
+      setIsLoading(false);
     };
 
     handleRequestPopularFilms().catch(console.error);
   }, []);
 
   const handleShowMorePopularFilms = async () => {
-    setIsLoading(true);
     const { movies: newMovies, page: newPage, totalPages } = await API.MOVIES.popular(lastPage + 1);
     setPopularMovies([...popularMovies, ...newMovies]);
     setLastPage(newPage);
     setIsMoreEnable(lastPage <= totalPages);
-    setIsLoading(false);
   };
 
   return {

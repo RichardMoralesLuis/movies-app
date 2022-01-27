@@ -26,3 +26,8 @@ export interface SearchCompanyResult extends CompanyResult {
   totalResults: number;
 }
 
+export interface SearchInformation {
+  totalResults: number;
+  totalPages: number;
+}
+

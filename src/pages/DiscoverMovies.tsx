@@ -60,7 +60,7 @@ export const DiscoverMovies: FC = () => {
         </Filters>
       </FiltersContainer>
       <div>
-        <MoviesList movies={movies}/>
+        <MoviesList movies={movies} onUpdateMovies={() => console.log('update')} searchInformation={{ totalPages: 1 } as any}/>
       </div>
     </Container>
   </>;
