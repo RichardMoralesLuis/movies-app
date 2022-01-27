@@ -1,16 +1,7 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { API } from '../api/API';
 import dayjs from 'dayjs';
-
-interface UseFilterResponse {
-  handleChangeGenres: (genres: string[]) => void;
-  handleChangeReleaseDate: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleChangeRating: (rating: number[]) => void;
-  handleFilter: () => void;
-  movies: any;
-  filters: any;
-  isFiltering: boolean;
-}
+import { MovieModel } from '../api/movies/models';
 
 interface Filters {
   genres?: string[];
@@ -18,9 +9,22 @@ interface Filters {
   rating?: number[];
 }
 
+
+interface UseFilterResponse {
+  handleChangeGenres: (genres: string[]) => void;
+  handleChangeReleaseDate: (date: string) => void;
+  handleChangeRating: (rating: number[]) => void;
+  handleFilter: () => void;
+  movies: any;
+  filters: Filters;
+  isFiltering: boolean;
+}
+
 export const toUTC = (date: Date): string => dayjs(date, { utc: true }).toISOString();
 export const average = (rating: number[]): number => Number(((rating[0] + rating[1]) / 2).toFixed(2));
+
 const toFilterValue = (key: string, value: any) => {
+  console.log('ey', key, value);
   if (key === 'genres') {
     return value.join(',');
   }
@@ -33,16 +37,16 @@ const toFilterValue = (key: string, value: any) => {
 };
 
 const FILTER_PARAMS: any = {
-  genres: 'genres',
+  genres: 'with_genres',
   releaseDate: 'release_date.gte',
-  rating: 'vote_average.gt'
+  rating: 'vote_average.gte'
 };
 
-const toFilterParams = (filters: any) => {
+const toFilterParams = (filters: Filters) => {
   const params: any = {};
   Object.entries(filters).forEach((entry) => {
     const paramKey = FILTER_PARAMS[entry[0]];
-    params[paramKey] = toFilterValue(paramKey, entry[1]);
+    params[paramKey] = toFilterValue(entry[0], entry[1]);
   });
 
   return params;
@@ -51,20 +55,20 @@ const toFilterParams = (filters: any) => {
 export const useFilter = (): UseFilterResponse => {
   const [filters, setFilter] = useState<Filters>({});
   const [isFiltering, setIsFiltering] = useState(false);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<MovieModel[]>([]);
 
   const handleChangeGenres = (genres: string[]) => setFilter({ ...filters, genres: genres as any });
   const handleChangeRating = (rating: number[]) => setFilter({ ...filters, rating: rating });
-  const handleChangeReleaseDate = (event: ChangeEvent<HTMLInputElement>) => {
-    const date = new Date(event.target.value);
-    setFilter({ ...filters, releaseDate: toUTC(date) });
+  const handleChangeReleaseDate = (date: string) => {
+    const releaseDate = new Date(date);
+    setFilter({ ...filters, releaseDate: toUTC(releaseDate) });
   };
 
 
   const handleFilter = async () => {
     setIsFiltering(true);
     const paramFilters = toFilterParams(filters);
-    const { results: movies }: any = await API.DISCOVER.filter(paramFilters);
+    const { movies } = await API.DISCOVER.filter(paramFilters);
     setMovies(movies);
     setIsFiltering(false);
   };

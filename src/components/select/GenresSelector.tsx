@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 interface SelectProps {
@@ -10,7 +10,7 @@ interface SelectProps {
 const MenuProps = {
   PaperProps: {
     style: {
-      width: '100%'
+      width: 300
     }
   }
 };
@@ -22,9 +22,10 @@ export const GenresSelector: FC<SelectProps> = ({ genres, onSelectGenres, select
     onSelectGenres(genres);
   };
 
-  return <FormControl sx={{ width: '100%' }}>
+  return <FormControl sx={{ width: 300 }}>
     <InputLabel>Genres</InputLabel>
     <Select
+      autoWidth={false}
       multiple
       onChange={handleSelectGenres}
       value={selectedGenres}
