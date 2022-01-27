@@ -6,6 +6,7 @@ import { Movie } from './Movie';
 const Container = styled.div`
   padding: 22px;
   display: flex;
+  flex: 1;
   gap: 18px;
   overflow-y: scroll;
 `;
@@ -13,18 +14,20 @@ const Container = styled.div`
 interface MoviesProps {
   movies: MovieModel[];
   onUpdateMovies: () => void;
+  isMoreEnable: boolean;
 }
 
-export const MoviesCarrousel: FC<MoviesProps> = ({ movies, onUpdateMovies }) => {
+export const MoviesCarrousel: FC<MoviesProps> = ({ movies, onUpdateMovies, isMoreEnable }) => {
   const scrollRef = useRef<any>(null);
 
   const handleScroll = () => {
-    if (scrollRef.current?.scrollWidth - scrollRef.current.scrollLeft === scrollRef.current?.clientWidth) {
+    const isScrollFinished = scrollRef.current?.scrollWidth - scrollRef.current.scrollLeft === scrollRef.current?.clientWidth;
+    if ((isScrollFinished) && (isMoreEnable)) {
       onUpdateMovies();
     }
   };
 
-  return <Container ref={scrollRef} onScroll={handleScroll} >
+  return <Container ref={scrollRef} onScroll={handleScroll}>
     {movies.map(movie => <Movie movie={movie} key={movie.id}/>)}
   </Container>;
 };

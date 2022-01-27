@@ -9,13 +9,7 @@ import { useSearchCompanies } from '../hooks/search/useSearchCompanies';
 import { MoviesList } from '../components/movies/MoviesList';
 import { CastList } from '../components/search/CastList';
 import { CompaniesList } from '../components/search/CompaniesList';
-
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  padding: 22px;
-  gap: 20px;
-`;
+import { PageContainer } from './PageContainer';
 
 const SectionsName = styled.div`
   display: flex;
@@ -53,13 +47,13 @@ export const SearchResults: FC = () => {
 
   return <>
     <Search onSearch={handleSearch} defaultValue={searchValue}/>
-    <Container>
+    <PageContainer>
       <SectionsName>
         <ResultsSections totalMovies={moviesSearchInformation.totalResults} totalCasts={totalCasts} totalCompanies={totalCompanies} onSelect={handleSelect} selectedSection={selectedSection}/>
       </SectionsName>
       <SectionContainer>
         {sectionToShow}
       </SectionContainer>
-    </Container>
+    </PageContainer>
   </>;
 };
