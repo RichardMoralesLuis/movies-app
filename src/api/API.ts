@@ -2,7 +2,6 @@ import { MoviesResult } from './movies/models';
 import { toMovies } from './movies/parser';
 import { SearchCastResult, SearchCompanyResult, SearchMovieResult } from './search/model';
 import { toSearchCasts, toSearchCompanies, toSearchMovies } from './search/parse';
-import { toCompanies } from './companies/parser';
 
 const buildURLParams = (params: any = {}): URLSearchParams => {
   const searchParams = new URLSearchParams();
@@ -40,6 +39,6 @@ export const API = {
     all: () => get('genre/movie/list')
   },
   DISCOVER: {
-    filter: (params: any) => get('discover/movie', params, toMovies)
+    filter: (params: any) => get<MoviesResult>('discover/movie', { ...params, sort_by: 'original_title.asc' }, toMovies)
   }
 };

@@ -16,15 +16,16 @@ const Container = styled.div`
   gap: 20px;
 `;
 
+const SectionsName = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const SectionContainer = styled.div`
   display: flex;
   justify-content: flex-start;
 `;
 
-const SectionsName = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
 
 export const SearchResults: FC = () => {
   const { query }: any = useParams();

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Box, Slider } from '@mui/material';
 
 interface RatingSlideProps {
-  value: number[];
+  value?: number[];
   onChange: (value: number[]) => void;
 }
 
