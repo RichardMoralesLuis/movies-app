@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { MovieModel } from '../../api/movies/models';
 import styled from '@emotion/styled';
 import { Movie } from './Movie';
@@ -12,11 +12,19 @@ const Container = styled.div`
 
 interface MoviesProps {
   movies: MovieModel[];
+  onUpdateMovies: () => void;
 }
 
-export const MoviesCarrousel: FC<MoviesProps> = ({ movies }) => {
+export const MoviesCarrousel: FC<MoviesProps> = ({ movies, onUpdateMovies }) => {
+  const scrollRef = useRef<any>(null);
 
-  return <Container>
+  const handleScroll = () => {
+    if (scrollRef.current?.scrollWidth - scrollRef.current.scrollLeft === scrollRef.current?.clientWidth) {
+      onUpdateMovies();
+    }
+  };
+
+  return <Container ref={scrollRef} onScroll={handleScroll} >
     {movies.map(movie => <Movie movie={movie} key={movie.id}/>)}
   </Container>;
 };

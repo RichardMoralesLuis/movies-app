@@ -1,28 +1,29 @@
 import { useEffect, useState } from 'react';
 import { MovieModel } from '../../api/movies/models';
 import { API } from '../../api/API';
+import { SearchInformation } from '../../api/search/model';
 
 interface UseSearchMoviesResult {
   isSearchingMovies: boolean;
   movies: any;
   handleShowMoreFilms: () => void;
-  totalMovies: number;
+  searchInformation: SearchInformation;
 }
 
 export const useSearchMovies = (query: string): UseSearchMoviesResult => {
   const [isSearchingMovies, setIsSearchingMovies] = useState<boolean>(false);
   const [movies, setMovies] = useState<MovieModel[]>([]);
+  const [searchInformation, setSearchInformation] = useState<SearchInformation>({ totalResults: 0, totalPages: 0 });
   const [page, setPage] = useState<number>(1);
-  const [totalMovies, setTotalMovies] = useState<number>(0);
 
 
   useEffect(() => {
     const doSearchRequests = async () => {
       setIsSearchingMovies(true);
-      const { movies, page, totalResults } = await API.MOVIES.search(query);
+      const { movies, page, totalResults, totalPages } = await API.MOVIES.search(query);
       setMovies(movies);
       setPage(page);
-      setTotalMovies(totalResults);
+      setSearchInformation({ totalPages, totalResults });
       setIsSearchingMovies(false);
     };
 
@@ -32,17 +33,16 @@ export const useSearchMovies = (query: string): UseSearchMoviesResult => {
   }, [query]);
 
   const handleShowMoreFilms = async () => {
-    setIsSearchingMovies(true);
-    const { movies: newMovies, page: newPage } = await API.MOVIES.search(query, page + 1);
+    const nextPage = page + 1;
+    const { movies: newMovies } = await API.MOVIES.search(query, nextPage);
     setMovies([...movies, ...newMovies]);
-    setPage(newPage);
-    setIsSearchingMovies(false);
+    setPage(nextPage);
   };
 
   return {
     isSearchingMovies,
     movies,
-    totalMovies,
+    searchInformation,
     handleShowMoreFilms
   };
 };
