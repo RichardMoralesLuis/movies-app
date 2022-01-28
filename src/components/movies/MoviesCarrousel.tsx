@@ -1,5 +1,5 @@
 import React, { FC, useRef } from 'react';
-import { MovieModel } from '../../api/movies/models';
+import { SimpleMovieApiModel } from '../../api/movies/models';
 import styled from '@emotion/styled';
 import { Movie } from './Movie';
 
@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 interface MoviesProps {
-  movies: MovieModel[];
+  movies: SimpleMovieApiModel[];
   onUpdateMovies: () => void;
   isMoreEnable: boolean;
 }

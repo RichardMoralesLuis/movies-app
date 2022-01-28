@@ -1,10 +1,14 @@
+import { CompanyModel } from '../companies/models';
+import { Genres } from '../genres/models';
+import { CastAPI } from '../cast/model';
+
 export interface MoviesApiResponse {
-  results: MovieAPI[];
+  results: SimpleMovieApiModel[];
   total_pages: number;
   page: number;
 }
 
-export interface MovieAPI {
+export interface SimpleMovieApiModel {
   title: string;
   genre_ids: number[];
   id: number;
@@ -14,20 +18,32 @@ export interface MovieAPI {
   overview: string;
 }
 
-export interface MovieModel {
+export interface MovieDetailModel {
   title: string;
-  genres: number[];
+  original_title: string;
+  genres: Genres[];
   id: number;
-  posterPath?: string;
+  poster_path?: string;
   video: boolean;
   overview: string;
-  backdropPath?: string;
+  backdrop_path?: string;
+  status: string;
+  release_date: string;
+  revenue: number;
+  production_companies: CompanyModel[];
+  budget: number;
+  vote_average: number;
 }
 
 export interface MoviesResult {
-  movies: MovieModel[];
+  movies: SimpleMovieApiModel[];
   page: number;
   totalPages: number;
+}
+
+export interface CreditsResponse {
+  id: number;
+  cast: CastAPI[];
 }
 
 

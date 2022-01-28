@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { API } from '../api/API';
 import dayjs from 'dayjs';
-import { MovieModel } from '../api/movies/models';
+import { SimpleMovieApiModel } from '../api/movies/models';
 
 interface Filters {
   genres?: string[];
@@ -55,7 +55,7 @@ const toFilterParams = (filters: Filters) => {
 export const useFilter = (): UseFilterResponse => {
   const [filters, setFilter] = useState<Filters>({});
   const [isFiltering, setIsFiltering] = useState(false);
-  const [movies, setMovies] = useState<MovieModel[] | undefined>();
+  const [movies, setMovies] = useState<SimpleMovieApiModel[] | undefined>();
 
   const handleChangeGenres = (genres: string[]) => setFilter({ ...filters, genres: genres as any });
   const handleChangeRating = (rating: number[]) => setFilter({ ...filters, rating: rating });

@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { SearchResults } from './pages/SearchResults';
 import { Login } from './pages/Login';
 import { LoginSession } from './pages/LoginSession';
+import { MovieDetails } from './pages/MovieDetails';
 
 export const Router: FC = () => {
   return <BrowserRouter>
@@ -14,6 +15,7 @@ export const Router: FC = () => {
       <Route path="/search/:query" element={<SearchResults/>}/>
       <Route path="/login/validate/:token" element={<Login/>}/>
       <Route path="/login/session" element={<LoginSession/>}/>
+      <Route path="/movie/:movieId" element={<MovieDetails/>}/>
     </Routes>
   </BrowserRouter>;
 };

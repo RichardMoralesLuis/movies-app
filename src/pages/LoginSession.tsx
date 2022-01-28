@@ -13,27 +13,28 @@ const Container = styled.div`
 
 export const LoginSession: FC = () => {
   const [isLoadingSession, setIsLoadingSession] = useState(true);
-  const query = new URLSearchParams(useLocation().search);
+  const location = useLocation();
   const navigate = useNavigate();
   const context = useMainContext();
 
   useEffect(() => {
-    const requestSession = async (requestTokenValidated: string) => {
-      setIsLoadingSession(true);
-      const { session_id } = await API.USER.session(requestTokenValidated);
-      context.setSessionId(session_id);
-      setIsLoadingSession(false);
+    const requestSession = async () => {
+      const query = new URLSearchParams(location.search);
+      const denied = query.get('denied');
+      const requestTokenValidated = query.get('request_token');
+
+      if (!denied) {
+        setIsLoadingSession(true);
+        const { session_id } = await API.USER.session(requestTokenValidated!);
+        context.setSessionId(session_id);
+        setIsLoadingSession(false);
+      }
     };
 
 
-    const denied = query.get('denied');
-    const requestTokenValidated = query.get('request_token');
+    requestSession().catch(console.error);
 
-    if (!denied) {
-      requestSession(requestTokenValidated!).catch(console.error);
-    }
-
-  }, []);
+  }, [context, location]);
 
   const handleGoHome = () => navigate('/');
 
