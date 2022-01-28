@@ -1,12 +1,24 @@
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import { ContextProvider } from '../context/Context';
+import { Context, ContextResult } from '../context/Context';
 
-export function renderWithRouter(ui: any, { route = '/' } = {}) {
+
+export interface ContextMockProps {
+  withUser?: boolean;
+}
+
+const USER_ACCOUNT_MOCK = { username: 'test', name: 'test', id: 1 };
+
+export function renderWithRouter(ui: any, { route = '/' } = {}, contextValue: ContextMockProps = {}) {
+
+  const values: Partial<ContextResult> = {
+    userAccount: contextValue.withUser ? USER_ACCOUNT_MOCK : undefined
+  };
+
   return {
-    ...render(<ContextProvider>
+    ...render(<Context.Provider value={values as ContextResult}>
       <BrowserRouter>{ui}
       </BrowserRouter>
-    </ContextProvider>), history
+    </Context.Provider>)
   };
 }
