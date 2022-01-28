@@ -7,11 +7,13 @@ interface UseFavoritesResult {
   isLoadingFavoritesMovies: boolean;
   handleAddFavorite: (movieId: number) => void;
   handleRemoveFavorite: (movieId: number) => void;
+  handleShowMoreFilms: () => void;
 }
 
 export const useFavorites = (accountId?: number, sessionId?: string): UseFavoritesResult => {
   const [favoriteMovies, setFavoriteMovies] = useState<SimpleMovieApiModel[]>([]);
   const [isLoadingFavoritesMovies, setIsLoadingFavoritesMovies] = useState<boolean>(true);
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     const requestFavoriteFilms = async () => {
@@ -47,12 +49,20 @@ export const useFavorites = (accountId?: number, sessionId?: string): UseFavorit
     }
   };
 
+  const handleShowMoreFilms = async () => {
+    const nextPage = page + 1;
+    const { movies: newMovies } = await API.MOVIES.favorites(accountId!, sessionId!, nextPage);
+    setFavoriteMovies([...favoriteMovies, ...newMovies]);
+    setPage(nextPage);
+  };
+
 
   return {
     favoriteMovies,
     isLoadingFavoritesMovies,
     handleAddFavorite,
-    handleRemoveFavorite
+    handleRemoveFavorite,
+    handleShowMoreFilms
   };
 
 };

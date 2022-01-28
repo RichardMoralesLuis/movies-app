@@ -28,6 +28,7 @@ export const NavBar = () => {
       <Tabs onChange={handleChange} aria-label="navbar-tabs" textColor="inherit" value={pathname}>
         <Tab label="Home" value="/"/>
         <Tab label="Discover" value="/discover"/>
+        {userAccount ? <Tab label="Favorites" value="/movie/favorites"/> : null}
         <ButtonContainer>
           {userAccount ? <Button color="inherit" onClick={closeSession}>LogOut</Button> : <Button color="inherit" onClick={handleLogin}>Login</Button>}
         </ButtonContainer>

@@ -2,16 +2,14 @@ import React, { FC } from 'react';
 import { SimpleMovieApiModel } from '../../api/movies/models';
 import { MovieItem } from './MovieItem';
 import { Button, List } from '@mui/material';
-import { SearchInformation } from '../../api/search/model';
 import { LIST_STYLE, MORE_RESULTS_BUTTON_STYLE } from './styles';
 
 interface MoviesProps {
   movies: SimpleMovieApiModel[];
-  searchInformation: SearchInformation;
   onShowMoreMovies: () => void;
 }
 
-export const MoviesList: FC<MoviesProps> = ({ movies, onShowMoreMovies, searchInformation }) => {
+export const MoviesList: FC<MoviesProps> = ({ movies, onShowMoreMovies }) => {
 
   const handleShowMore = () => onShowMoreMovies();
 
