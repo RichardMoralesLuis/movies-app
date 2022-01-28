@@ -14,15 +14,14 @@ const Container = styled.div`
 interface MoviesProps {
   movies: SimpleMovieApiModel[];
   onUpdateMovies: () => void;
-  isMoreEnable: boolean;
 }
 
-export const MoviesCarrousel: FC<MoviesProps> = ({ movies, onUpdateMovies, isMoreEnable }) => {
+export const MoviesCarrousel: FC<MoviesProps> = ({ movies, onUpdateMovies }) => {
   const scrollRef = useRef<any>(null);
 
   const handleScroll = () => {
     const isScrollFinished = scrollRef.current?.scrollWidth - scrollRef.current.scrollLeft === scrollRef.current?.clientWidth;
-    if ((isScrollFinished) && (isMoreEnable)) {
+    if (isScrollFinished) {
       onUpdateMovies();
     }
   };

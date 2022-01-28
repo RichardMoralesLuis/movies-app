@@ -24,7 +24,7 @@ export const useMovie = (id: number): UseMovieResult => {
     };
 
     requestMovie().catch(console.error);
-  }, []);
+  }, [id]);
 
 
   return { movie, isLoadingMovie, movieCasts };

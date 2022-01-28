@@ -15,6 +15,7 @@ const Header = styled.div<any>`
   background-size: cover;
   background-repeat: no-repeat;
   background-image: ${props => `url(${props.background})`};
+  margin: 20px 0;
 `;
 
 const Gradient = styled.div`

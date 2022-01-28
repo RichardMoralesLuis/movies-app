@@ -30,11 +30,9 @@ export const useSearchCompanies = (query: string): UseSearchCompaniesResult => {
   }, [query]);
 
   const handleShowMoreCompanies = async () => {
-    setIsSearchingCompanies(true);
     const { companies: newCompanies, page: newPage } = await API.PRODUCTION_COMPANIES.search(query, page + 1);
     setCompanies([...companies, ...newCompanies]);
     setPage(newPage);
-    setIsSearchingCompanies(false);
   };
 
   return {
