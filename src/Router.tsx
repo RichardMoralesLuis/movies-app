@@ -6,6 +6,7 @@ import { SearchResults } from './pages/SearchResults';
 import { Login } from './pages/Login';
 import { LoginSession } from './pages/LoginSession';
 import { MovieDetails } from './pages/MovieDetails';
+import { FavoriteFilms } from './pages/FavoriteFilms';
 
 export const Router: FC = () => {
   return <BrowserRouter>
@@ -16,6 +17,7 @@ export const Router: FC = () => {
       <Route path="/login/validate/:token" element={<Login/>}/>
       <Route path="/login/session" element={<LoginSession/>}/>
       <Route path="/movie/:movieId" element={<MovieDetails/>}/>
+      <Route path="/movie/favorites" element={<FavoriteFilms/>}/>
     </Routes>
   </BrowserRouter>;
 };

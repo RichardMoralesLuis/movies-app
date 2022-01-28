@@ -39,7 +39,7 @@ export const SearchResults: FC = () => {
   }
 
   const searchSections = {
-    'Movies': <MoviesList movies={movies} onShowMoreMovies={handleShowMoreMovies} searchInformation={moviesSearchInformation}/>,
+    'Movies': <MoviesList movies={movies} onShowMoreMovies={handleShowMoreMovies}/>,
     'Casts': <CastList casts={casts} onShowMoreCasts={handleShowMoreCasts}/>,
     'Companies': <CompaniesList companiesList={companies} onShowMoreCompanies={handleShowMoreCompanies}/>
   };
