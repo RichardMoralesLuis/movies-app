@@ -20,7 +20,7 @@ export const NavBar = () => {
   const handleChange = (event: React.ChangeEvent<{}>, route: string) => navigate(route);
   const handleLogin = async () => {
     const { request_token } = await API.USER.token();
-    navigate(`/login/validate/${request_token}`);
+    navigate(`/login/validate/${request_token}`, { state: { pathname } });
   };
 
   return <div>
