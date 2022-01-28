@@ -24,7 +24,6 @@ export const toUTC = (date: Date): string => dayjs(date, { utc: true }).toISOStr
 export const average = (rating: number[]): number => Number(((rating[0] + rating[1]) / 2).toFixed(2));
 
 const toFilterValue = (key: string, value: any) => {
-  console.log('ey', key, value);
   if (key === 'genres') {
     return value.join(',');
   }

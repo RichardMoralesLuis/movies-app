@@ -8,6 +8,9 @@ import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { CastsCarrousel } from '../components/movies/CastsCarrousel';
 import { NavBar } from '../components/navbar/Navbar';
+import { FavoriteIcon } from '../components/favorite/FavoriteIcon';
+import { useFavorites } from '../hooks/useFavorite';
+import { useMainContext } from '../context/Context';
 
 const Header = styled.div<any>`
   linear-gradient(to right, rgba(20.00%, 15.69%, 20.39%, 1.00) 150px, rgba(20.00%, 15.69%, 20.39%, 0.84) 100%)
@@ -58,6 +61,7 @@ const InformationSection = styled.section`
 const Title = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
 `;
 
@@ -103,28 +107,36 @@ const LeftInformation = styled.section`
   padding: 36px;
 `;
 
-
 const dollarFormatter = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
 export const MovieDetails: FC = () => {
+  const { userAccount, sessionId } = useMainContext();
   const { movieId } = useParams();
-
   const { movie, isLoadingMovie, movieCasts } = useMovie(Number(movieId));
+  const { isLoadingFavoritesMovies, favoriteMovies, handleAddFavorite, handleRemoveFavorite } = useFavorites(userAccount?.id, sessionId);
 
-  if (isLoadingMovie) {
+  const handleFavorite = (isFavorite: boolean) => {
+    if (isFavorite) {
+      handleRemoveFavorite(movie!.id);
+      return;
+    }
+
+    handleAddFavorite(movie!.id);
+  };
+
+  if (isLoadingMovie || isLoadingFavoritesMovies) {
     return <PageContainer>Loading movie</PageContainer>;
   }
 
   const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${movie?.poster_path}`;
   const backdropPath = `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${movie?.backdrop_path}`;
   const source = movie?.poster_path ? imagePath : DEFAULT_IMAGE_PATH;
-
-  console.log('movie', movie);
   const releaseDate = dayjs(new Date(movie!.release_date)).format('DD/MM/YYYY');
   const genres = movie?.genres.map(genre => genre.name).join(', ');
   const companies = movie?.production_companies.map(company => company.name).join(', ');
   const budget = dollarFormatter.format(movie?.budget ?? 0);
   const revenue = dollarFormatter.format(movie?.revenue ?? 0);
+  const isFavorite = Boolean(favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie?.id));
 
   return <>
     <NavBar/>
@@ -137,7 +149,8 @@ export const MovieDetails: FC = () => {
           <InformationContainer>
             <InformationSection>
               <Title>
-                <Typography sx={{ color: '#FFF' }} component="span" fontWeight="bold" variant="h4" color="text.primary">{movie?.title}</Typography>
+                <Typography sx={{ color: '#FFF', marginRight: '12px' }} component="span" fontWeight="bold" variant="h4" color="text.primary">{movie?.title}</Typography>
+                {userAccount ? <FavoriteIcon isFavorite={isFavorite} onClick={handleFavorite}/> : null}
               </Title>
               <SubInformation>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{movie?.release_date}</Typography>
