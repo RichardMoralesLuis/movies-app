@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { DiscoverMovies } from './pages/DiscoverMovies';
-import { Home } from './pages/Home';
+import { Home } from './pages/home/Home';
 import { SearchResults } from './pages/SearchResults';
 import { Login } from './pages/Login';
 import { LoginSession } from './pages/LoginSession';

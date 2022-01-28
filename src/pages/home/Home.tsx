@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Search } from '../components/filters/Search';
+import { Search } from '../../components/filters/Search';
 import { useNavigate } from 'react-router-dom';
-import { usePopularMovies } from '../hooks/usePopularMovies';
-import { MoviesCarrousel } from '../components/movies/MoviesCarrousel';
+import { usePopularMovies } from '../../hooks/usePopularMovies';
+import { MoviesCarrousel } from '../../components/movies/MoviesCarrousel';
 import styled from '@emotion/styled';
-import { NavBar } from '../components/navbar/Navbar';
+import { NavBar } from '../../components/navbar/Navbar';
 import { Typography } from '@mui/material';
-import { useNowPlayingMovies } from '../hooks/useNowPlayingMovies';
+import { useNowPlayingMovies } from '../../hooks/useNowPlayingMovies';
 
 const Container = styled.div`
   display: flex;
@@ -48,13 +48,13 @@ export const Home: FC = () => {
       <Typography component="span" variant="h4" color="text.secondary">Feel free to find the best film for today!</Typography>
     </Information>
     <Search onSearch={handleSearch}/>
-    <MoviesContainer>
+    {popularMovies.length ? <MoviesContainer>
       <Typography component="span" fontWeight="bold" variant="body1" color="text.primary">Popular movies</Typography>
       <MoviesCarrousel movies={popularMovies} onUpdateMovies={handleShowMorePopularFilms}/>
-    </MoviesContainer>
-    <MoviesContainer>
+    </MoviesContainer> : null}
+    {nowPlayingMovies.length ? <MoviesContainer>
       <Typography component="span" fontWeight="bold" variant="body1" color="text.primary">Noy playing</Typography>
       <MoviesCarrousel movies={nowPlayingMovies} onUpdateMovies={handleShowMoreNowPlayingFilms}/>
-    </MoviesContainer>
+    </MoviesContainer> : null}
   </Container>;
 };
