@@ -15,7 +15,7 @@ export const LoginSession: FC = () => {
   const [isLoadingSession, setIsLoadingSession] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
-  const context = useMainContext();
+  const { setAccount } = useMainContext();
 
   useEffect(() => {
     const requestSession = async () => {
@@ -26,7 +26,7 @@ export const LoginSession: FC = () => {
       if (!denied) {
         setIsLoadingSession(true);
         const { session_id } = await API.USER.session(requestTokenValidated!);
-        context.setSessionId(session_id);
+        setAccount(session_id);
         setIsLoadingSession(false);
       }
     };
@@ -34,7 +34,7 @@ export const LoginSession: FC = () => {
 
     requestSession().catch(console.error);
 
-  }, [context, location]);
+  }, [location, setAccount]);
 
   const handleGoHome = () => navigate('/');
 

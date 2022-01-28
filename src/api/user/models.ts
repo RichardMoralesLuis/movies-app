@@ -8,3 +8,9 @@ export interface SessionResponse {
   success: boolean,
   session_id: string;
 }
+
+export interface Account {
+  id: number;
+  username: string;
+  name: string;
+}

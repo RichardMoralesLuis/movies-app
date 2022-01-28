@@ -15,7 +15,7 @@ const ButtonContainer = styled.div`
 export const NavBar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { sessionId, closeSession } = useMainContext();
+  const { userAccount, closeSession } = useMainContext();
 
   const handleChange = (event: React.ChangeEvent<{}>, route: string) => navigate(route);
   const handleLogin = async () => {
@@ -29,7 +29,7 @@ export const NavBar = () => {
         <Tab label="Home" value="/"/>
         <Tab label="Discover" value="/discover"/>
         <ButtonContainer>
-          {sessionId ? <Button color="inherit" onClick={closeSession}>LogOut</Button> : <Button color="inherit" onClick={handleLogin}>Login</Button>}
+          {userAccount ? <Button color="inherit" onClick={closeSession}>LogOut</Button> : <Button color="inherit" onClick={handleLogin}>Login</Button>}
         </ButtonContainer>
       </Tabs>
     </AppBar>

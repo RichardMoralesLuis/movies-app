@@ -1,8 +1,11 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
+import { Account } from '../api/user/models';
+import { useAccount } from '../hooks/useAccount';
 
 export interface ContextResult {
   sessionId?: string;
-  setSessionId: (sessionId: string) => void;
+  userAccount?: Account;
+  setAccount: (sessionId: string) => void;
   closeSession: () => void;
 }
 
@@ -11,20 +14,23 @@ export const Context = createContext<ContextResult | null>(null);
 const useCreateState = (): ContextResult => {
   const sessionSaved = localStorage.getItem('session');
   const [sessionId, setSessionId] = useState<string | undefined>(sessionSaved ?? undefined);
+  const { account, closeSession } = useAccount(sessionId ?? undefined);
 
-  const handleSetSessionId = useCallback((sessionId: string) => {
+  const handleSetAccount = useCallback((sessionId: string) => {
     setSessionId(sessionId);
     localStorage.setItem('session', sessionId);
   }, []);
 
   const handleCloseSession = useCallback(() => {
+    closeSession();
     setSessionId(undefined);
     localStorage.removeItem('session');
-  }, []);
+  }, [closeSession]);
 
   return {
+    userAccount: account,
     sessionId,
-    setSessionId: handleSetSessionId,
+    setAccount: handleSetAccount,
     closeSession: handleCloseSession
   };
 };
