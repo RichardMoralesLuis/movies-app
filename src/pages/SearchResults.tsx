@@ -9,7 +9,7 @@ import { useSearchCompanies } from '../hooks/search/useSearchCompanies';
 import { MoviesList } from '../components/movies/MoviesList';
 import { CastList } from '../components/search/CastList';
 import { CompaniesList } from '../components/search/CompaniesList';
-import { PageContainer } from './PageContainer';
+import { PageContainer } from '../components/containers/PageContainer';
 import { NavBar } from '../components/navbar/Navbar';
 
 const SectionsName = styled.div`

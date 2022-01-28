@@ -44,15 +44,15 @@ export const Home: FC = () => {
   return <Container>
     <NavBar/>
     <Information>
-      <Typography component="span" fontWeight="bold" variant="h1">🐒Welcome to the Movies App🐒</Typography>
+      <Typography component="span" fontWeight="bold" variant="h2">🐒 Welcome to the Movies App 🐒</Typography>
       <Typography component="span" variant="h4" color="text.secondary">Feel free to find the best film for today!</Typography>
     </Information>
     <Search onSearch={handleSearch}/>
-    {popularMovies.length ? <MoviesContainer>
+    {popularMovies?.length ? <MoviesContainer>
       <Typography component="span" fontWeight="bold" variant="body1" color="text.primary">Popular movies</Typography>
       <MoviesCarrousel movies={popularMovies} onUpdateMovies={handleShowMorePopularFilms}/>
     </MoviesContainer> : null}
-    {nowPlayingMovies.length ? <MoviesContainer>
+    {nowPlayingMovies?.length ? <MoviesContainer>
       <Typography component="span" fontWeight="bold" variant="body1" color="text.primary">Noy playing</Typography>
       <MoviesCarrousel movies={nowPlayingMovies} onUpdateMovies={handleShowMoreNowPlayingFilms}/>
     </MoviesContainer> : null}

@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API } from '../api/API';
 import { useMainContext } from '../context/Context';
-import { PageContainer } from './PageContainer';
+import { PageContainer } from '../components/containers/PageContainer';
 import { Button, Typography } from '@mui/material';
 import styled from '@emotion/styled';
 

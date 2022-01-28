@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMovie } from '../hooks/useMovie';
-import { PageContainer } from './PageContainer';
-import { DEFAULT_IMAGE_PATH } from '../components/movies/Movie';
+import { useMovie } from '../../hooks/useMovie';
+import { PageContainer } from '../../components/containers/PageContainer';
+import { DEFAULT_IMAGE_PATH } from '../../components/movies/Movie';
 import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { CastsCarrousel } from '../components/movies/CastsCarrousel';
-import { NavBar } from '../components/navbar/Navbar';
-import { FavoriteIcon } from '../components/favorite/FavoriteIcon';
-import { useFavorites } from '../hooks/useFavorite';
-import { useMainContext } from '../context/Context';
+import { CastsCarrousel } from '../../components/movies/CastsCarrousel';
+import { NavBar } from '../../components/navbar/Navbar';
+import { FavoriteIcon } from '../../components/favorite/FavoriteIcon';
+import { useFavorites } from '../../hooks/useFavorite';
+import { useMainContext } from '../../context/Context';
 
 const Header = styled.div<any>`
   linear-gradient(to right, rgba(20.00%, 15.69%, 20.39%, 1.00) 150px, rgba(20.00%, 15.69%, 20.39%, 0.84) 100%)
@@ -153,8 +153,6 @@ export const MovieDetails: FC = () => {
                 {userAccount ? <FavoriteIcon isFavorite={isFavorite} onClick={handleFavorite}/> : null}
               </Title>
               <SubInformation>
-                <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{movie?.release_date}</Typography>
-                <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary"> - </Typography>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{releaseDate}</Typography>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary"> - </Typography>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{genres}</Typography>

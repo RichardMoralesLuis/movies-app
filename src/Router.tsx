@@ -5,7 +5,7 @@ import { Home } from './pages/home/Home';
 import { SearchResults } from './pages/SearchResults';
 import { Login } from './pages/Login';
 import { LoginSession } from './pages/LoginSession';
-import { MovieDetails } from './pages/MovieDetails';
+import { MovieDetails } from './pages/movieDetails/MovieDetails';
 import { FavoriteFilms } from './pages/FavoriteFilms';
 
 export const Router: FC = () => {
