@@ -19,8 +19,8 @@ export const useFavorites = (accountId?: number, sessionId?: string): UseFavorit
     const requestFavoriteFilms = async () => {
       setIsLoadingFavoritesMovies(true);
       const { movies } = await API.MOVIES.favorites(accountId!, sessionId!);
-      setIsLoadingFavoritesMovies(false);
       setFavoriteMovies(movies);
+      setIsLoadingFavoritesMovies(false);
     };
 
     if (accountId && sessionId) {
