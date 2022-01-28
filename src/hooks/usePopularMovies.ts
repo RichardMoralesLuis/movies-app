@@ -7,7 +7,7 @@ interface UsePopularFilmsResult {
   handleShowMorePopularFilms: () => void;
 }
 
-export const usePopularFilms = (): UsePopularFilmsResult => {
+export const usePopularMovies = (): UsePopularFilmsResult => {
   const [popularMovies, setPopularMovies] = useState<any[]>([]);
   const [lastPage, setLastPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);

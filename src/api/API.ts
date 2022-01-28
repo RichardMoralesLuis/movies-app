@@ -42,6 +42,7 @@ const post = async <T>(path: string, body?: any, params?: any, parser?: any): Pr
 export const API = {
   MOVIES: {
     popular: (page: number = 1) => get<MoviesResult>('movie/popular', { page }, toMovies),
+    nowPlaying: (page: number = 1) => get<MoviesResult>('movie/now_playing', { page }, toMovies),
     search: (query: string, page = 1) => get<SearchMovieResult>('search/movie', { query, page }, toSearchMovies),
     byId: (movieId: number) => get<MovieDetailModel>(`movie/${movieId}`),
     credits: (movieId: number) => get<CreditsResponse>(`movie/${movieId}/credits`),
