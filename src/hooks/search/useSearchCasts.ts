@@ -18,7 +18,6 @@ export const useSearchCasts = (query: string): UseSearchCastsResult => {
   useEffect(() => {
     const doSearchRequests = async () => {
       const { casts, page, totalResults } = await API.CASTS.search(query);
-      // const { results: productionCompanies }: any = await API.PRODUCTION_COMPANIES.search(query);
       setPage(page);
       setTotalMovies(totalResults);
       setCasts(casts);
@@ -31,11 +30,9 @@ export const useSearchCasts = (query: string): UseSearchCastsResult => {
   }, [query]);
 
   const handleShowMoreCasts = async () => {
-    setIsSearchingCast(true);
     const { casts: newCasts, page: newPage } = await API.CASTS.search(query, page + 1);
     setCasts([...casts, ...newCasts]);
     setPage(newPage);
-    setIsSearchingCast(false);
   };
 
   return {

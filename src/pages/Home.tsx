@@ -20,7 +20,7 @@ const MoviesContainer = styled.div`
 `;
 
 export const Home: FC = () => {
-  const { popularMovies, handleShowMorePopularFilms, isLoading, isMoreEnable } = usePopularFilms();
+  const { popularMovies, handleShowMorePopularFilms, isLoading } = usePopularFilms();
   const navigate = useNavigate();
 
   const handleSearch = (movieName: string) => navigate(`/search/${movieName}`);
@@ -34,7 +34,7 @@ export const Home: FC = () => {
     <Search onSearch={handleSearch}/>
     <MoviesContainer>
       <Typography component="span" fontWeight="bold" variant="body1" color="text.primary">Popular movies</Typography>
-      <MoviesCarrousel movies={popularMovies} onUpdateMovies={handleShowMorePopularFilms} isMoreEnable={isMoreEnable}/>
+      <MoviesCarrousel movies={popularMovies} onUpdateMovies={handleShowMorePopularFilms}/>
     </MoviesContainer>
   </Container>;
 };

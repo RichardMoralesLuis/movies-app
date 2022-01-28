@@ -6,7 +6,7 @@ import { SearchInformation } from '../../api/search/model';
 interface UseSearchMoviesResult {
   isSearchingMovies: boolean;
   movies: any;
-  handleShowMoreFilms: () => void;
+  handleShowMoreMovies: () => void;
   searchInformation: SearchInformation;
 }
 
@@ -43,6 +43,6 @@ export const useSearchMovies = (query: string): UseSearchMoviesResult => {
     isSearchingMovies,
     movies,
     searchInformation,
-    handleShowMoreFilms
+    handleShowMoreMovies: handleShowMoreFilms
   };
 };

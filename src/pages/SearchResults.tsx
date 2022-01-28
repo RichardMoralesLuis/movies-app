@@ -10,6 +10,7 @@ import { MoviesList } from '../components/movies/MoviesList';
 import { CastList } from '../components/search/CastList';
 import { CompaniesList } from '../components/search/CompaniesList';
 import { PageContainer } from './PageContainer';
+import { NavBar } from '../components/navbar/Navbar';
 
 const SectionsName = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ export const SearchResults: FC = () => {
   const { query }: any = useParams();
   const [searchValue, setSearchValue] = useState(query);
   const [selectedSection, setSelectedSection] = useState<SearchSections>('Movies');
-  const { movies, searchInformation: moviesSearchInformation, isSearchingMovies, handleShowMoreFilms } = useSearchMovies(searchValue);
+  const { movies, searchInformation: moviesSearchInformation, isSearchingMovies, handleShowMoreMovies } = useSearchMovies(searchValue);
   const { casts, totalCasts, isSearchingCast, handleShowMoreCasts } = useSearchCasts(searchValue);
   const { companies, totalCompanies, isSearchingCompanies, handleShowMoreCompanies } = useSearchCompanies(searchValue);
 
@@ -38,14 +39,15 @@ export const SearchResults: FC = () => {
   }
 
   const searchSections = {
-    'Movies': <MoviesList movies={movies} onUpdateMovies={handleShowMoreFilms} searchInformation={moviesSearchInformation}/>,
-    'Casts': <CastList casts={casts}/>,
-    'Companies': <CompaniesList companiesList={companies}/>
+    'Movies': <MoviesList movies={movies} onShowMoreMovies={handleShowMoreMovies} searchInformation={moviesSearchInformation}/>,
+    'Casts': <CastList casts={casts} onShowMoreCasts={handleShowMoreCasts}/>,
+    'Companies': <CompaniesList companiesList={companies} onShowMoreCompanies={handleShowMoreCompanies}/>
   };
 
   const sectionToShow = searchSections[selectedSection];
 
   return <>
+    <NavBar/>
     <Search onSearch={handleSearch} defaultValue={searchValue}/>
     <PageContainer>
       <SectionsName>
