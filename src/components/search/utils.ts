@@ -5,5 +5,6 @@ export const itemListStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   margin: '0 12px 12px 12px',
-  boxShadow: '0 2px 8px rgb(0 0 0 / 10%)'
+  boxShadow: '0 2px 8px rgb(0 0 0 / 10%)',
+  cursor: 'pointer'
 };

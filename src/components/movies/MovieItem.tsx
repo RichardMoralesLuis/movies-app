@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { MovieModel } from '../../api/movies/models';
+import { SimpleMovieApiModel } from '../../api/movies/models';
 import { ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { DEFAULT_IMAGE_PATH } from './Movie';
 import styled from '@emotion/styled';
 import { itemListStyle } from '../search/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Image = styled.img`
   max-height: 150px;
@@ -11,24 +12,17 @@ const Image = styled.img`
 `;
 
 interface MovieResultProps {
-  movie: MovieModel;
+  movie: SimpleMovieApiModel;
 }
 
-const itemStyle = {
-  border: '1px solid rgba(227,227,227)',
-  borderRadius: '8px',
-  maxWidth: '70%',
-  alignItems: 'center',
-  justifyContent: 'center',
-  margin: '0 12px 12px 12px',
-  boxShadow: '0 2px 8px rgb(0 0 0 / 10%)'
-};
-
 export const MovieItem: FC<MovieResultProps> = ({ movie }) => {
-  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${movie.posterPath}`;
-  const source = movie.posterPath ? imagePath : DEFAULT_IMAGE_PATH;
+  const navigate = useNavigate();
+  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${movie.poster_path}`;
+  const source = movie.poster_path ? imagePath : DEFAULT_IMAGE_PATH;
 
-  return <ListItem alignItems="flex-start" style={itemListStyle}>
+  const handleGotoDetails = () => navigate(`/movie/${movie.id}`);
+
+  return <ListItem alignItems="flex-start" style={itemListStyle} onClick={handleGotoDetails}>
     <ListItemAvatar>
       <Image src={source}/>
     </ListItemAvatar>

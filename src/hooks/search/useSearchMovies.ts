@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MovieModel } from '../../api/movies/models';
+import { SimpleMovieApiModel } from '../../api/movies/models';
 import { API } from '../../api/API';
 import { SearchInformation } from '../../api/search/model';
 
@@ -12,7 +12,7 @@ interface UseSearchMoviesResult {
 
 export const useSearchMovies = (query: string): UseSearchMoviesResult => {
   const [isSearchingMovies, setIsSearchingMovies] = useState<boolean>(false);
-  const [movies, setMovies] = useState<MovieModel[]>([]);
+  const [movies, setMovies] = useState<SimpleMovieApiModel[]>([]);
   const [searchInformation, setSearchInformation] = useState<SearchInformation>({ totalResults: 0, totalPages: 0 });
   const [page, setPage] = useState<number>(1);
 

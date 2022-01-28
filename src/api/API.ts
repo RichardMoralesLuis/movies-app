@@ -1,4 +1,4 @@
-import { MoviesResult } from './movies/models';
+import { CreditsResponse, MovieDetailModel, MoviesResult } from './movies/models';
 import { toMovies } from './movies/parser';
 import { SearchCastResult, SearchCompanyResult, SearchMovieResult } from './search/model';
 import { toSearchCasts, toSearchCompanies, toSearchMovies } from './search/parse';
@@ -42,7 +42,9 @@ const post = async <T>(path: string, body?: any, params?: any, parser?: any): Pr
 export const API = {
   MOVIES: {
     popular: (page: number = 1) => get<MoviesResult>('movie/popular', { page }, toMovies),
-    search: (query: string, page = 1) => get<SearchMovieResult>('search/movie', { query, page }, toSearchMovies)
+    search: (query: string, page = 1) => get<SearchMovieResult>('search/movie', { query, page }, toSearchMovies),
+    byId: (movieId: number) => get<MovieDetailModel>(`movie/${movieId}`),
+    credits: (movieId: number) => get<CreditsResponse>(`movie/${movieId}/credits`)
   },
   CASTS: {
     search: (query: string, page = 1) => get<SearchCastResult>('search/person', { query, page }, toSearchCasts)
