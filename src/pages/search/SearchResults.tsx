@@ -14,11 +14,13 @@ import { NavBar } from '../../components/navbar/Navbar';
 
 const SectionsName = styled.div`
   display: flex;
+  flex: 1;
   justify-content: flex-end;
 `;
 
 const SectionContainer = styled.div`
   display: flex;
+  flex: 2;
   justify-content: flex-start;
 `;
 

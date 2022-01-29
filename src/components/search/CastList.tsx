@@ -3,6 +3,7 @@ import { Button, List } from '@mui/material';
 import { CastModel } from '../../api/cast/model';
 import { CastItem } from './CastItem';
 import { LIST_STYLE, MORE_RESULTS_BUTTON_STYLE } from '../movies/styles';
+import { EmptyResults } from './EmptyResults';
 
 interface CastListProps {
   casts: CastModel[];
@@ -10,6 +11,10 @@ interface CastListProps {
 }
 
 export const CastList: FC<CastListProps> = ({ casts, onShowMoreCasts }) => {
+
+  if (!casts.length) {
+    return <EmptyResults/>;
+  }
 
   return <List sx={LIST_STYLE}>
     {casts.map(cast => <CastItem cast={cast} key={cast.id}/>)}
