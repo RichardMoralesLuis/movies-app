@@ -11,15 +11,15 @@ const renderNavbar = (props: any = {}) => {
   return { screen, getElement };
 };
 
-describe('Navbar', function() {
-  describe('render', function() {
-    it('should render ok', function() {
+describe('Navbar', function () {
+  describe('render', function () {
+    it('should render ok', function () {
       renderNavbar();
     });
   });
 
-  describe('Navbar tabs', function() {
-    it('should not render the user sections if user is not logged', function() {
+  describe('Navbar tabs', function () {
+    it('should not render the user sections if user is not logged', function () {
       const { getElement } = renderNavbar();
 
       const logoutButton = getElement('Logout');
@@ -29,7 +29,7 @@ describe('Navbar', function() {
       expect(favoritesSection).not.toBeDefined();
     });
 
-    it('should render the user sections if user is logged', async function() {
+    it('should render the user sections if user is logged', async function () {
       const { getElement } = renderNavbar({ withUser: true });
 
       const logoutButton = getElement('LogOut');

@@ -12,9 +12,9 @@ const renderSearch = () => {
 
   return { utils, getInput, type, pressEnter, searchSpy };
 };
-describe('Search', function() {
-  describe('Search behaviour', function() {
-    it('should not call the onChange if the value is less than 3 letters', function() {
+describe('Search', function () {
+  describe('Search behaviour', function () {
+    it('should not call the onChange if the value is less than 3 letters', function () {
       const { type, pressEnter, searchSpy } = renderSearch();
 
       type('aa');
@@ -23,7 +23,7 @@ describe('Search', function() {
       expect(searchSpy).not.toBeCalled();
     });
 
-    it('should call the onChange if the value is equal 3 letters', function() {
+    it('should call the onChange if the value is equal 3 letters', function () {
       const { type, pressEnter, searchSpy } = renderSearch();
 
       type('aaa');
@@ -32,7 +32,7 @@ describe('Search', function() {
       expect(searchSpy).toBeCalled();
     });
 
-    it('should call the onChange if the value is more than 3 letters', function() {
+    it('should call the onChange if the value is more than 3 letters', function () {
       const { type, pressEnter, searchSpy } = renderSearch();
 
       type('aaaa');

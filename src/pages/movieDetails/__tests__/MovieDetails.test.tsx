@@ -2,7 +2,7 @@ import { renderWithRouter } from '../../../test/TestHelpers';
 import { MovieDetails } from '../MovieDetails';
 import { API } from '../../../api/API';
 import { MovieDetailModel } from '../../../api/movies/models';
-import { act } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 
 const MOVIE_MOCK: MovieDetailModel = {
   id: 1,
@@ -39,14 +39,14 @@ const renderMovieDetails = async () => {
   return { utils, getElement };
 };
 
-describe('MovieDetails', function() {
-  describe('render', function() {
-    it('should render ok', async function() {
+describe('MovieDetails', function () {
+  describe('render', function () {
+    it('should render ok', async function () {
       await renderMovieDetails();
     });
   });
-  describe('render sections', function() {
-    it('should render ok the release date formatted', async function() {
+  describe('render sections', function () {
+    it('should render ok the release date formatted', async function () {
       const { getElement } = await renderMovieDetails();
 
       const releaseDate = getElement('28/01/2022');
@@ -54,7 +54,7 @@ describe('MovieDetails', function() {
       expect(releaseDate).toBeInTheDocument();
     });
 
-    it('should render ok the genres formatted', async function() {
+    it('should render ok the genres formatted', async function () {
       const { getElement } = await renderMovieDetails();
 
       const genres = getElement('Action, Comedy');
@@ -62,7 +62,7 @@ describe('MovieDetails', function() {
       expect(genres).toBeInTheDocument();
     });
 
-    it('should render ok the production companies formatted', async function() {
+    it('should render ok the production companies formatted', async function () {
       const { getElement } = await renderMovieDetails();
 
       const companies = getElement('Company 1, Company 2');
@@ -70,7 +70,7 @@ describe('MovieDetails', function() {
       expect(companies).toBeInTheDocument();
     });
 
-    it('should render ok the budget formatted', async function() {
+    it('should render ok the budget formatted', async function () {
       const { getElement } = await renderMovieDetails();
 
       const budget = getElement('$2,000,000.00');
@@ -78,7 +78,7 @@ describe('MovieDetails', function() {
       expect(budget).toBeInTheDocument();
     });
 
-    it('should render ok the revenue formatted', async function() {
+    it('should render ok the revenue formatted', async function () {
       const { getElement } = await renderMovieDetails();
 
       const revenue = getElement('$3,000.00');
