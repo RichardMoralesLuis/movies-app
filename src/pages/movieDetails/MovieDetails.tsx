@@ -1,16 +1,14 @@
 import styled from '@emotion/styled';
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMovie } from '../hooks/useMovie';
-import { PageContainer } from './PageContainer';
-import { DEFAULT_IMAGE_PATH } from '../components/movies/Movie';
+import { useMovie } from '../../hooks/useMovie';
+import { PageContainer } from '../../components/containers/PageContainer';
+import { DEFAULT_IMAGE_PATH } from '../../components/movies/Movie';
 import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { CastsCarrousel } from '../components/movies/CastsCarrousel';
-import { NavBar } from '../components/navbar/Navbar';
-import { FavoriteIcon } from '../components/favorite/FavoriteIcon';
-import { useFavorites } from '../hooks/useFavorite';
-import { useMainContext } from '../context/Context';
+import { CastsCarrousel } from '../../components/movies/CastsCarrousel';
+import { NavBar } from '../../components/navbar/Navbar';
+import { useMainContext } from '../../context/Context';
 
 const Header = styled.div<any>`
   linear-gradient(to right, rgba(20.00%, 15.69%, 20.39%, 1.00) 150px, rgba(20.00%, 15.69%, 20.39%, 0.84) 100%)
@@ -104,7 +102,7 @@ const LeftInformation = styled.section`
   box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
   border: 1px solid rgba(227, 227, 227);
   border-radius: 8px;
-  padding: 36px;
+  padding: 50px;
 `;
 
 const dollarFormatter = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
@@ -113,18 +111,18 @@ export const MovieDetails: FC = () => {
   const { userAccount, sessionId } = useMainContext();
   const { movieId } = useParams();
   const { movie, isLoadingMovie, movieCasts } = useMovie(Number(movieId));
-  const { isLoadingFavoritesMovies, favoriteMovies, handleAddFavorite, handleRemoveFavorite } = useFavorites(userAccount?.id, sessionId);
+  // const { isLoadingFavoritesMovies, favoriteMovies, handleAddFavorite, handleRemoveFavorite } = useFavorites(userAccount?.id, sessionId);
 
-  const handleFavorite = (isFavorite: boolean) => {
-    if (isFavorite) {
-      handleRemoveFavorite(movie!.id);
-      return;
-    }
-
-    handleAddFavorite(movie!.id);
-  };
-
-  if (isLoadingMovie || isLoadingFavoritesMovies) {
+  // const handleFavorite = (isFavorite: boolean) => {
+  //   if (isFavorite) {
+  //     handleRemoveFavorite(movie!.id);
+  //     return;
+  //   }
+  //
+  //   handleAddFavorite(movie!.id);
+  // };
+  //
+  if (isLoadingMovie) {
     return <PageContainer>Loading movie</PageContainer>;
   }
 
@@ -136,7 +134,7 @@ export const MovieDetails: FC = () => {
   const companies = movie?.production_companies.map(company => company.name).join(', ');
   const budget = dollarFormatter.format(movie?.budget ?? 0);
   const revenue = dollarFormatter.format(movie?.revenue ?? 0);
-  const isFavorite = Boolean(favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie?.id));
+  // const isFavorite = Boolean(favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie?.id));
 
   return <>
     <NavBar/>
@@ -150,11 +148,9 @@ export const MovieDetails: FC = () => {
             <InformationSection>
               <Title>
                 <Typography sx={{ color: '#FFF', marginRight: '12px' }} component="span" fontWeight="bold" variant="h4" color="text.primary">{movie?.title}</Typography>
-                {userAccount ? <FavoriteIcon isFavorite={isFavorite} onClick={handleFavorite}/> : null}
+                {/*{userAccount ? <FavoriteIcon isFavorite={isFavorite} onClick={handleFavorite}/> : null}*/}
               </Title>
               <SubInformation>
-                <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{movie?.release_date}</Typography>
-                <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary"> - </Typography>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{releaseDate}</Typography>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary"> - </Typography>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{genres}</Typography>
@@ -178,6 +174,8 @@ export const MovieDetails: FC = () => {
         <CastsCarrousel casts={movieCasts}/>
       </RightInformation>
       <LeftInformation>
+        <Typography sx={{ boxSizing: 'border-box' }} component="p" fontWeight="bold" variant="body1" color="text.primary">Original title</Typography>
+        <Typography sx={{ boxSizing: 'border-box', marginBottom: '20px' }} component="p" variant="body2" color="text.primary">{movie?.original_title}</Typography>
         <Typography sx={{ boxSizing: 'border-box' }} component="p" fontWeight="bold" variant="body1" color="text.primary">Status</Typography>
         <Typography sx={{ boxSizing: 'border-box', marginBottom: '20px' }} component="p" variant="body2" color="text.primary">{movie?.status}</Typography>
         <Typography sx={{ boxSizing: 'border-box' }} component="p" fontWeight="bold" variant="body1" color="text.primary">Budget</Typography>

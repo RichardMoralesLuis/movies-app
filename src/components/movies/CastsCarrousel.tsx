@@ -15,7 +15,7 @@ interface CastsCarrouselProps {
   casts: CastAPI[];
 }
 
-export const CastsCarrousel: FC<CastsCarrouselProps> = ({ casts }) => {
+export const CastsCarrousel: FC<CastsCarrouselProps> = ({ casts = [] }) => {
 
   const castsToRender: CastAPI[] = casts.length > 10 ? casts.slice(0, 10) : casts;
 

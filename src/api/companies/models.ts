@@ -12,7 +12,7 @@ export interface CompanyAPI {
 
 export interface CompanyModel {
   id: number;
-  logoPath: string;
+  logoPath?: string;
   name: string;
 }
 

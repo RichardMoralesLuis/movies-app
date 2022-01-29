@@ -15,7 +15,7 @@ const MenuProps = {
   }
 };
 
-export const GenresSelector: FC<SelectProps> = ({ genres, onSelectGenres, selectedGenres = [] }) => {
+export const GenresSelector: FC<SelectProps> = ({ genres = [], onSelectGenres, selectedGenres = [] }) => {
   const handleSelectGenres = (event: any) => {
     const { target: { value } } = event;
     const genres = typeof value === 'string' ? value.split(',') : value;

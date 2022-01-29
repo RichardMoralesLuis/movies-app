@@ -12,7 +12,7 @@ interface UseFavoritesResult {
 
 export const useFavorites = (accountId?: number, sessionId?: string): UseFavoritesResult => {
   const [favoriteMovies, setFavoriteMovies] = useState<SimpleMovieApiModel[]>([]);
-  const [isLoadingFavoritesMovies, setIsLoadingFavoritesMovies] = useState<boolean>(true);
+  const [isLoadingFavoritesMovies, setIsLoadingFavoritesMovies] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {

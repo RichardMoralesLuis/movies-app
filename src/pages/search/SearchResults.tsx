@@ -1,16 +1,16 @@
 import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSearchCasts } from '../hooks/search/useSearchCasts';
+import { useSearchCasts } from '../../hooks/search/useSearchCasts';
 import styled from '@emotion/styled';
-import { ResultsSections, SearchSections } from '../components/search/ResultsSections';
-import { useSearchMovies } from '../hooks/search/useSearchMovies';
-import { Search } from '../components/filters/Search';
-import { useSearchCompanies } from '../hooks/search/useSearchCompanies';
-import { MoviesList } from '../components/movies/MoviesList';
-import { CastList } from '../components/search/CastList';
-import { CompaniesList } from '../components/search/CompaniesList';
-import { PageContainer } from './PageContainer';
-import { NavBar } from '../components/navbar/Navbar';
+import { ResultsSections, SearchSections } from '../../components/search/ResultsSections';
+import { useSearchMovies } from '../../hooks/search/useSearchMovies';
+import { Search } from '../../components/filters/Search';
+import { useSearchCompanies } from '../../hooks/search/useSearchCompanies';
+import { MoviesList } from '../../components/movies/MoviesList';
+import { CastList } from '../../components/search/CastList';
+import { CompaniesList } from '../../components/search/CompaniesList';
+import { PageContainer } from '../../components/containers/PageContainer';
+import { NavBar } from '../../components/navbar/Navbar';
 
 const SectionsName = styled.div`
   display: flex;
