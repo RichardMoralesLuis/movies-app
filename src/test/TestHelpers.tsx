@@ -12,7 +12,8 @@ const USER_ACCOUNT_MOCK = { username: 'test', name: 'test', id: 1 };
 export function renderWithRouter(ui: any, { route = '/' } = {}, contextValue: ContextMockProps = {}) {
 
   const values: Partial<ContextResult> = {
-    userAccount: contextValue.withUser ? USER_ACCOUNT_MOCK : undefined
+    userAccount: contextValue.withUser ? USER_ACCOUNT_MOCK : undefined,
+    sessionId: '111'
   };
 
   return {

@@ -3,6 +3,7 @@ import { toMovies } from './movies/parser';
 import { SearchCastResult, SearchCompanyResult, SearchMovieResult } from './search/model';
 import { toSearchCasts, toSearchCompanies, toSearchMovies } from './search/parse';
 import { Account, LoginResponse, SessionResponse } from './user/models';
+import { Genre } from './genres/models';
 
 const buildURLParams = (params: any = {}): URLSearchParams => {
   const searchParams = new URLSearchParams();
@@ -57,7 +58,7 @@ export const API = {
     search: (query: string, page = 1) => get<SearchCompanyResult>('search/company', { query, page }, toSearchCompanies)
   },
   GENRES: {
-    all: () => get('genre/movie/list')
+    all: () => get<Genre[]>('genre/movie/list')
   },
   DISCOVER: {
     filter: (params: any) => get<MoviesResult>('discover/movie', { ...params, sort_by: 'original_title.asc' }, toMovies)

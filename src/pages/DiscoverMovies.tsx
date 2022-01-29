@@ -37,14 +37,14 @@ const Filters = styled.div`
 export const DiscoverMovies: FC = () => {
   const { genres, isLoadingGenres } = useLoadGenres();
   const { movies, handleFilter, handleChangeGenres, handleChangeReleaseDate, filters, isFiltering, handleChangeRating } = useFilter();
-  const { popularMovies } = usePopularMovies();
+  const { popularMovies = [] } = usePopularMovies();
 
 
   if (isLoadingGenres || isFiltering) {
     return <div>Loading...</div>;
   }
 
-  const moviesToShow = movies ? movies : popularMovies;
+  const moviesToShow = movies.length ? movies : popularMovies;
 
   return <>
     <NavBar/>

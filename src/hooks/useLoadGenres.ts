@@ -7,8 +7,8 @@ interface UseLoadGenresResult {
 }
 
 export const useLoadGenres = (): UseLoadGenresResult => {
-  const [isLoadingGenres, setIsLoadingGenres] = useState(false);
   const [genres, setGenres] = useState([]);
+  const [isLoadingGenres, setIsLoadingGenres] = useState(false);
 
 
   useEffect(() => {

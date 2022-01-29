@@ -1,5 +1,5 @@
 import { CompanyModel } from '../companies/models';
-import { Genres } from '../genres/models';
+import { Genre } from '../genres/models';
 import { CastAPI } from '../cast/model';
 
 export interface MoviesApiResponse {
@@ -14,14 +14,14 @@ export interface SimpleMovieApiModel {
   id: number;
   poster_path?: string;
   backdrop_path?: string;
-  video: boolean;
+  video?: boolean;
   overview: string;
 }
 
 export interface MovieDetailModel {
   title: string;
   original_title: string;
-  genres: Genres[];
+  genres: Genre[];
   id: number;
   poster_path?: string;
   video: boolean;
