@@ -22,7 +22,7 @@ If you want to run the project you will need some extra configurations:
 * When you have the APIKEY you need to create a .env file and set the following variables:
     * `REACT_APP_API_KEY=<<APIKEY>>`
     * `REACT_APP_BASE_URL=https://api.themoviedb.org/3`
-    * `REACT_APP_MOVIEDB_IMAGE_URL="https://image.tmdb.org/t/p/w300"`
+    * `REACT_APP_MOVIEDB_IMAGE_URL=https://image.tmdb.org/t/p/w300`
 
 As you can see we are using the v3 of the API.
 
