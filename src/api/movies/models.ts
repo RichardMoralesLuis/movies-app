@@ -46,4 +46,17 @@ export interface CreditsResponse {
   cast: CastAPI[];
 }
 
+export interface Video {
+  name: string;
+  key: string;
+  site: string;
+  id: string;
+  type: string;
+}
+
+export interface VideoResponse {
+  results: Video[];
+  id: number;
+}
+
 
