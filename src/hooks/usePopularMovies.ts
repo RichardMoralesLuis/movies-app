@@ -5,12 +5,15 @@ interface UsePopularFilmsResult {
   popularMovies: any[];
   isLoading: boolean;
   handleShowMorePopularFilms: () => void;
+  popularMoviesError: boolean;
+  handleClosePopularMoviesError: () => void;
 }
 
 export const usePopularMovies = (): UsePopularFilmsResult => {
   const [popularMovies, setPopularMovies] = useState<any[]>([]);
   const [lastPage, setLastPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [popularMoviesError, setPopularMoviesError] = useState<boolean>(false);
 
   useEffect(() => {
     const handleRequestPopularFilms = async () => {
@@ -21,7 +24,11 @@ export const usePopularMovies = (): UsePopularFilmsResult => {
       setIsLoading(false);
     };
 
-    handleRequestPopularFilms().catch(console.error);
+    handleRequestPopularFilms()
+      .catch(e => {
+        console.error(e); // TODO: Send error to sentry.
+        setPopularMoviesError(true);
+      });
   }, []);
 
   const handleShowMorePopularFilms = async () => {
@@ -30,9 +37,13 @@ export const usePopularMovies = (): UsePopularFilmsResult => {
     setLastPage(newPage);
   };
 
+  const closePopularMoviesError = () => setPopularMoviesError(false);
+
   return {
     popularMovies,
     isLoading,
-    handleShowMorePopularFilms
+    handleShowMorePopularFilms,
+    popularMoviesError,
+    handleClosePopularMoviesError: closePopularMoviesError
   };
 };

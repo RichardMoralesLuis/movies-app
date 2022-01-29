@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import { NavBar } from '../../components/navbar/Navbar';
 import { Typography } from '@mui/material';
 import { useNowPlayingMovies } from '../../hooks/useNowPlayingMovies';
+import { Banner } from '../../components/banner/Banner';
 
 const Container = styled.div`
   display: flex;
@@ -31,17 +32,24 @@ const MoviesContainer = styled.div`
 `;
 
 export const Home: FC = () => {
-  const { popularMovies, handleShowMorePopularFilms, isLoading: isLoadingPopularMovies } = usePopularMovies();
-  const { nowPlayingMovies, handleShowMoreNowPlayingFilms, isLoading: isLoadingNowPlayingMovies } = useNowPlayingMovies();
+  const { popularMovies, handleShowMorePopularFilms, isLoading: isLoadingPopularMovies, popularMoviesError, handleClosePopularMoviesError } = usePopularMovies();
+  const { nowPlayingMovies, handleShowMoreNowPlayingFilms, isLoading: isLoadingNowPlayingMovies, nowPlayingMoviesError, handleCloseNowPlayingMoviesError } = useNowPlayingMovies();
   const navigate = useNavigate();
 
   const handleSearch = (movieName: string) => navigate(`/search/${movieName}`);
+  const handleClose = () => {
+    handleClosePopularMoviesError();
+    handleCloseNowPlayingMoviesError();
+  };
 
   if (isLoadingPopularMovies || isLoadingNowPlayingMovies) {
     return <div>Searching films...</div>;
   }
 
+  const error = popularMoviesError || nowPlayingMoviesError;
+
   return <Container>
+    {error ? <Banner message="Error loading films, please refresh the page" onClose={handleClose}/> : null}
     <NavBar/>
     <Information>
       <Typography component="span" fontWeight="bold" variant="h2">🐒 Welcome to the Movies App 🐒</Typography>

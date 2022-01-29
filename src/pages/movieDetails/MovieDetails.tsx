@@ -11,6 +11,7 @@ import { NavBar } from '../../components/navbar/Navbar';
 import { useMainContext } from '../../context/Context';
 import { FavoriteIcon } from '../../components/favorite/FavoriteIcon';
 import { useFavorites } from '../../hooks/useFavorite';
+import { Banner } from '../../components/banner/Banner';
 
 const Header = styled.div<any>`
   linear-gradient(to right, rgba(20.00%, 15.69%, 20.39%, 1.00) 150px, rgba(20.00%, 15.69%, 20.39%, 0.84) 100%)
@@ -112,7 +113,7 @@ const dollarFormatter = Intl.NumberFormat('en-US', { style: 'currency', currency
 export const MovieDetails: FC = () => {
   const { userAccount, sessionId } = useMainContext();
   const { movieId } = useParams();
-  const { movie, isLoadingMovie, movieCasts } = useMovie(Number(movieId));
+  const { movie, isLoadingMovie, movieCasts, movieError, handleCloseMovieError } = useMovie(Number(movieId));
   const { isLoadingFavoritesMovies, favoriteMovies, handleAddFavorite, handleRemoveFavorite } = useFavorites(userAccount?.id, sessionId);
 
   const handleFavorite = (isFavorite: boolean) => {
@@ -139,6 +140,7 @@ export const MovieDetails: FC = () => {
   const isFavorite = Boolean(favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie?.id));
 
   return <>
+    {movieError ? <Banner message="Error trying to load your movie, please try again" onClose={handleCloseMovieError}/> : null}
     <NavBar/>
     <Header background={backdropPath}>
       <Gradient>

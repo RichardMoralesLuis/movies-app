@@ -5,12 +5,15 @@ interface UseNowPlayingMoviesResult {
   nowPlayingMovies: any[];
   isLoading: boolean;
   handleShowMoreNowPlayingFilms: () => void;
+  nowPlayingMoviesError: boolean;
+  handleCloseNowPlayingMoviesError: () => void;
 }
 
 export const useNowPlayingMovies = (): UseNowPlayingMoviesResult => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState<any[]>([]);
   const [lastPage, setLastPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [nowPlayingMoviesError, setNowPlayingMoviesError] = useState<boolean>(false);
 
   useEffect(() => {
     const handleRequestPopularFilms = async () => {
@@ -21,7 +24,11 @@ export const useNowPlayingMovies = (): UseNowPlayingMoviesResult => {
       setIsLoading(false);
     };
 
-    handleRequestPopularFilms().catch(console.error);
+    handleRequestPopularFilms()
+      .catch(e => {
+        console.error(e); // TODO: Send to sentry;
+        setNowPlayingMoviesError(true);
+      });
   }, []);
 
   const handleShowMoreNowPlayingFilms = async () => {
@@ -30,9 +37,13 @@ export const useNowPlayingMovies = (): UseNowPlayingMoviesResult => {
     setLastPage(newPage);
   };
 
+  const handleCloseNowPlayingMoviesError = () => setNowPlayingMoviesError(false);
+
   return {
     nowPlayingMovies,
     isLoading,
-    handleShowMoreNowPlayingFilms
+    handleShowMoreNowPlayingFilms,
+    nowPlayingMoviesError,
+    handleCloseNowPlayingMoviesError
   };
 };

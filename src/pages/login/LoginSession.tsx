@@ -5,6 +5,7 @@ import { useMainContext } from '../../context/Context';
 import { PageContainer } from '../../components/containers/PageContainer';
 import { Button, Typography } from '@mui/material';
 import styled from '@emotion/styled';
+import { Banner } from '../../components/banner/Banner';
 
 const Container = styled.div`
   display: flex;
@@ -16,6 +17,8 @@ export const LoginSession: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { setAccount } = useMainContext();
+
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const requestSession = async () => {
@@ -31,12 +34,15 @@ export const LoginSession: FC = () => {
       }
     };
 
-
-    requestSession().catch(console.error);
+    requestSession().catch(e => {
+      console.error(e); // TODO: send error to sentry
+      setError(true);
+    });
 
   }, [location, setAccount]);
 
   const handleGoHome = () => navigate('/');
+  const handleCloseError = () => setError(false);
 
 
   if (isLoadingSession) {
@@ -44,6 +50,7 @@ export const LoginSession: FC = () => {
   }
 
   return <PageContainer>
+    {error ? <Banner message="Error trying to login, please go home an try again" onClose={handleCloseError}/> : null}
     <Container>
       <Typography component="span" fontWeight="bold" variant="h2" color="text.primary">Login with success🙌🏻</Typography>
       <Button onClick={handleGoHome} variant="contained" style={{ marginTop: 22 }}>Go Home🏠</Button>
