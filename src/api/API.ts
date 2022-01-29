@@ -1,5 +1,5 @@
-import { CreditsResponse, MovieDetailModel, MoviesResult } from './movies/models';
-import { toMovies } from './movies/parser';
+import { CreditsResponse, MovieDetailModel, MoviesResult, Video } from './movies/models';
+import { toMovies, toTrailer } from './movies/parser';
 import { SearchCastResult, SearchCompanyResult, SearchMovieResult } from './search/model';
 import { toSearchCasts, toSearchCompanies, toSearchMovies } from './search/parse';
 import { Account, LoginResponse, SessionResponse } from './user/models';
@@ -47,6 +47,7 @@ export const API = {
     search: (query: string, page = 1) => get<SearchMovieResult>('search/movie', { query, page }, toSearchMovies),
     byId: (movieId: number) => get<MovieDetailModel>(`movie/${movieId}`),
     credits: (movieId: number) => get<CreditsResponse>(`movie/${movieId}/credits`),
+    trailer: (movieId: number) => get<Video>(`movie/${movieId}/videos`, {}, toTrailer),
     favorites: (accountId: number, sessionId: string, page: number = 1) => get<MoviesResult>(`account/${accountId}/favorite/movies`, { session_id: sessionId, page }, toMovies),
     addFavorite: (accountId: number, movieId: number, sessionId: string) => post(`account/${accountId}/favorite`, { media_type: 'movie', media_id: movieId, favorite: true }, { session_id: sessionId }),
     removeFavorite: (accountId: number, movieId: number, sessionId: string) => post(`account/${accountId}/favorite`, { media_type: 'movie', media_id: movieId, favorite: false }, { session_id: sessionId })

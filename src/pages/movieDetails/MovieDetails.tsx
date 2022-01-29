@@ -12,6 +12,8 @@ import { useMainContext } from '../../context/Context';
 import { FavoriteIcon } from '../../components/favorite/FavoriteIcon';
 import { useFavorites } from '../../hooks/useFavorite';
 import { Banner } from '../../components/banner/Banner';
+import { DriveFileMove } from '@mui/icons-material';
+import { Trailer } from '../../components/trailer/Trailer';
 
 const Header = styled.div<any>`
   linear-gradient(to right, rgba(20.00%, 15.69%, 20.39%, 1.00) 150px, rgba(20.00%, 15.69%, 20.39%, 0.84) 100%)
@@ -152,6 +154,7 @@ export const MovieDetails: FC = () => {
             <InformationSection>
               <Title>
                 <Typography sx={{ color: '#FFF', marginRight: '12px' }} component="span" fontWeight="bold" variant="h4" color="text.primary">{movie?.title}</Typography>
+                <Trailer movie={movie}/>
                 {userAccount ? <FavoriteIcon isFavorite={isFavorite} onClick={handleFavorite}/> : null}
               </Title>
               <SubInformation>
