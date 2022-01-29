@@ -30,15 +30,15 @@ const renderHome = async () => {
   return { utils };
 };
 
-describe('Home', function() {
-  describe('Popular films', function() {
-    it('should render ok', async function() {
+describe('Home', function () {
+  describe('Popular films', function () {
+    it('should render ok', async function () {
       await renderHome();
     });
   });
 
-  describe('sections', function() {
-    it('should render ok the section', async function() {
+  describe('sections', function () {
+    it('should render ok the section', async function () {
       const { utils } = await renderHome();
 
       const popularSection = utils.getByText(/Popular movies/);
@@ -46,7 +46,7 @@ describe('Home', function() {
       expect(popularSection).toBeInTheDocument();
     });
 
-    it('should render ok the section', async function() {
+    it('should render ok the section', async function () {
       const { utils } = await renderHome();
 
       const noPlayingSection = utils.getByText(/Now playing/);

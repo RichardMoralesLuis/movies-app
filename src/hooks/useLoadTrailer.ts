@@ -16,7 +16,7 @@ export const useLoadTrailer = (movieId: number): UseLoadTrailerResults => {
     };
 
     requestTrailer().catch(console.error);
-  }, []);
+  }, [movieId]);
 
   return { trailerInfo };
 

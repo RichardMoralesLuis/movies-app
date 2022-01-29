@@ -12,7 +12,6 @@ import { useMainContext } from '../../context/Context';
 import { FavoriteIcon } from '../../components/favorite/FavoriteIcon';
 import { useFavorites } from '../../hooks/useFavorite';
 import { Banner } from '../../components/banner/Banner';
-import { DriveFileMove } from '@mui/icons-material';
 import { Trailer } from '../../components/trailer/Trailer';
 
 const Header = styled.div<any>`
