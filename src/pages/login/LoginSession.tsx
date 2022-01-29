@@ -14,6 +14,8 @@ const Container = styled.div`
 
 export const LoginSession: FC = () => {
   const [isLoadingSession, setIsLoadingSession] = useState(true);
+  const [isSessionDenied, setIsSessionDenied] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
   const { setAccount } = useMainContext();
@@ -31,7 +33,10 @@ export const LoginSession: FC = () => {
         const { session_id } = await API.USER.session(requestTokenValidated!);
         setAccount(session_id);
         setIsLoadingSession(false);
+        return;
       }
+      setIsLoadingSession(false);
+      setIsSessionDenied(true);
     };
 
     requestSession().catch(e => {
@@ -52,7 +57,7 @@ export const LoginSession: FC = () => {
   return <PageContainer>
     {error ? <Banner message="Error trying to login, please go home an try again" onClose={handleCloseError}/> : null}
     <Container>
-      <Typography component="span" fontWeight="bold" variant="h2" color="text.primary">Login with success🙌🏻</Typography>
+      {!isSessionDenied ? <Typography component="span" fontWeight="bold" variant="h2" color="text.primary">Login with success🙌🏻</Typography> : <Typography component="span" fontWeight="bold" variant="h2" color="text.primary">Session denied😥</Typography>}
       <Button onClick={handleGoHome} variant="contained" style={{ marginTop: 22 }}>Go Home🏠</Button>
     </Container>
   </PageContainer>;
