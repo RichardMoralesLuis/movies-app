@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/movies-app/static/css/main.ba17183d.css",
+    "main.js": "/movies-app/static/js/main.ed6455fe.js",
+    "static/js/27.400af1d6.chunk.js": "/movies-app/static/js/27.400af1d6.chunk.js",
+    "index.html": "/movies-app/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.ba17183d.css",
+    "static/js/main.ed6455fe.js"
+  ]
+}
