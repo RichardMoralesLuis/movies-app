@@ -2,7 +2,6 @@
   "name": "movies-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://RichardMoralesLuis.github.io/movies-app",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -25,10 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "ENVFILE=.env react-scripts start",
-    "build": "ENVFILE=.env GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "test-ci": "CI=true react-scripts test",
     "eject": "react-scripts eject"
