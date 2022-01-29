@@ -8,12 +8,15 @@ interface UseFavoritesResult {
   handleAddFavorite: (movieId: number) => void;
   handleRemoveFavorite: (movieId: number) => void;
   handleShowMoreFilms: () => void;
+  favoritesError: boolean;
+  handleCloseFavoriteError: () => void;
 }
 
 export const useFavorites = (accountId?: number, sessionId?: string): UseFavoritesResult => {
   const [favoriteMovies, setFavoriteMovies] = useState<SimpleMovieApiModel[]>([]);
   const [isLoadingFavoritesMovies, setIsLoadingFavoritesMovies] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
+  const [favoritesError, setFavoritesError] = useState<boolean>(false);
 
   useEffect(() => {
     const requestFavoriteFilms = async () => {
@@ -24,7 +27,10 @@ export const useFavorites = (accountId?: number, sessionId?: string): UseFavorit
     };
 
     if (accountId && sessionId) {
-      requestFavoriteFilms().catch(console.error);
+      requestFavoriteFilms().catch(e => {
+        console.error(e); // TODO: send error to sentry
+        setFavoritesError(true);
+      });
     }
 
   }, [accountId, sessionId]);
@@ -56,13 +62,17 @@ export const useFavorites = (accountId?: number, sessionId?: string): UseFavorit
     setPage(nextPage);
   };
 
+  const handleCloseFavoriteError = async () => setFavoritesError(false);
+
 
   return {
     favoriteMovies,
     isLoadingFavoritesMovies,
     handleAddFavorite,
     handleRemoveFavorite,
-    handleShowMoreFilms
+    handleShowMoreFilms,
+    favoritesError,
+    handleCloseFavoriteError
   };
 
 };
