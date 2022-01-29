@@ -9,6 +9,8 @@ import dayjs from 'dayjs';
 import { CastsCarrousel } from '../../components/movies/CastsCarrousel';
 import { NavBar } from '../../components/navbar/Navbar';
 import { useMainContext } from '../../context/Context';
+import { FavoriteIcon } from '../../components/favorite/FavoriteIcon';
+import { useFavorites } from '../../hooks/useFavorite';
 
 const Header = styled.div<any>`
   linear-gradient(to right, rgba(20.00%, 15.69%, 20.39%, 1.00) 150px, rgba(20.00%, 15.69%, 20.39%, 0.84) 100%)
@@ -111,18 +113,18 @@ export const MovieDetails: FC = () => {
   const { userAccount, sessionId } = useMainContext();
   const { movieId } = useParams();
   const { movie, isLoadingMovie, movieCasts } = useMovie(Number(movieId));
-  // const { isLoadingFavoritesMovies, favoriteMovies, handleAddFavorite, handleRemoveFavorite } = useFavorites(userAccount?.id, sessionId);
+  const { isLoadingFavoritesMovies, favoriteMovies, handleAddFavorite, handleRemoveFavorite } = useFavorites(userAccount?.id, sessionId);
 
-  // const handleFavorite = (isFavorite: boolean) => {
-  //   if (isFavorite) {
-  //     handleRemoveFavorite(movie!.id);
-  //     return;
-  //   }
-  //
-  //   handleAddFavorite(movie!.id);
-  // };
-  //
-  if (isLoadingMovie) {
+  const handleFavorite = (isFavorite: boolean) => {
+    if (isFavorite) {
+      handleRemoveFavorite(movie!.id);
+      return;
+    }
+
+    handleAddFavorite(movie!.id);
+  };
+
+  if (isLoadingMovie || isLoadingFavoritesMovies) {
     return <PageContainer>Loading movie</PageContainer>;
   }
 
@@ -134,7 +136,7 @@ export const MovieDetails: FC = () => {
   const companies = movie?.production_companies.map(company => company.name).join(', ');
   const budget = dollarFormatter.format(movie?.budget ?? 0);
   const revenue = dollarFormatter.format(movie?.revenue ?? 0);
-  // const isFavorite = Boolean(favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie?.id));
+  const isFavorite = Boolean(favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie?.id));
 
   return <>
     <NavBar/>
@@ -148,7 +150,7 @@ export const MovieDetails: FC = () => {
             <InformationSection>
               <Title>
                 <Typography sx={{ color: '#FFF', marginRight: '12px' }} component="span" fontWeight="bold" variant="h4" color="text.primary">{movie?.title}</Typography>
-                {/*{userAccount ? <FavoriteIcon isFavorite={isFavorite} onClick={handleFavorite}/> : null}*/}
+                {userAccount ? <FavoriteIcon isFavorite={isFavorite} onClick={handleFavorite}/> : null}
               </Title>
               <SubInformation>
                 <Typography sx={{ display: 'inline', color: '#FFF' }} component="span" variant="body2" color="text.primary">{releaseDate}</Typography>
