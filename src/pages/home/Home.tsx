@@ -53,7 +53,7 @@ export const Home: FC = () => {
       <MoviesCarrousel movies={popularMovies} onUpdateMovies={handleShowMorePopularFilms}/>
     </MoviesContainer> : null}
     {nowPlayingMovies?.length ? <MoviesContainer>
-      <Typography component="span" fontWeight="bold" variant="body1" color="text.primary">Noy playing</Typography>
+      <Typography component="span" fontWeight="bold" variant="body1" color="text.primary">Now playing</Typography>
       <MoviesCarrousel movies={nowPlayingMovies} onUpdateMovies={handleShowMoreNowPlayingFilms}/>
     </MoviesContainer> : null}
   </Container>;
