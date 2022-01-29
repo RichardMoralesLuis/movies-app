@@ -1,7 +1,7 @@
-import { renderWithRouter } from '../../test/TestHelpers';
-import { MovieDetails } from './MovieDetails';
-import { API } from '../../api/API';
-import { MovieDetailModel } from '../../api/movies/models';
+import { renderWithRouter } from '../../../test/TestHelpers';
+import { MovieDetails } from '../MovieDetails';
+import { API } from '../../../api/API';
+import { MovieDetailModel } from '../../../api/movies/models';
 import { act } from '@testing-library/react';
 
 const MOVIE_MOCK: MovieDetailModel = {
