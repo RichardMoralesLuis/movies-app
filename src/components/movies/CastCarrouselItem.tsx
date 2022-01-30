@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { CastAPI } from '../../api/cast/model';
-import { DEFAULT_IMAGE_PATH } from './Movie';
+import { Cast } from '../../api/cast/model';
+import { DEFAULT_IMAGE_PATH } from './MovieCarrouselItem';
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
 
@@ -14,7 +14,7 @@ const Image = styled.img`
 `;
 
 interface CastCarrouselItemProps {
-  cast: CastAPI;
+  cast: Cast;
 }
 
 export const CastCarrouselItem: FC<CastCarrouselItemProps> = ({ cast }) => {

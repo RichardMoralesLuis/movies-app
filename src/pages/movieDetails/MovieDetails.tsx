@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMovie } from '../../hooks/useMovie';
 import { PageContainer } from '../../components/containers/PageContainer';
-import { DEFAULT_IMAGE_PATH } from '../../components/movies/Movie';
+import { DEFAULT_IMAGE_PATH } from '../../components/movies/MovieCarrouselItem';
 import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { CastsCarrousel } from '../../components/movies/CastsCarrousel';

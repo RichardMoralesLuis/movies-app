@@ -1,23 +1,17 @@
-export interface CompaniesAPIResponse {
-  results: CompanyAPI[];
-  total_pages: number;
-  page: number;
-}
-
-export interface CompanyAPI {
+export interface Company {
   id: number;
   logo_path: string;
   name: string;
 }
 
-export interface CompanyModel {
-  id: number;
-  logoPath?: string;
-  name: string;
+export interface CompaniesAPIResponse {
+  results: Company[];
+  total_pages: number;
+  page: number;
 }
 
 export interface CompanyResult {
-  companies: CompanyModel[];
+  companies: Company[];
   page: number;
-  totalPages: number;
+  total_pages: number;
 }

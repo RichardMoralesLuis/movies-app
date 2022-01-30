@@ -1,23 +1,17 @@
-export interface CastAPI {
+export interface Cast {
   id: number;
   profile_path?: string;
   name: string;
 }
 
 export interface CastAPIResponse {
-  results: CastAPI[];
+  results: Cast[];
   page: number;
   total_pages: number;
 }
 
-export interface CastModel {
-  id: number;
-  profilePath?: string;
-  name: string;
-}
-
 export interface CastResult {
-  casts: CastModel[];
+  casts: Cast[];
   page: number;
-  totalPages: number;
+  total_pages: number;
 }

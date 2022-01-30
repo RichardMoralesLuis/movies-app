@@ -22,7 +22,7 @@ interface MovieProps {
   movie: SimpleMovieApiModel;
 }
 
-export const Movie: FC<MovieProps> = ({ movie }) => {
+export const MovieCarrouselItem: FC<MovieProps> = ({ movie }) => {
   const navigate = useNavigate();
   const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${movie.poster_path}`;
   const source = movie.poster_path ? imagePath : DEFAULT_IMAGE_PATH;

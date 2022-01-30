@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { API } from '../../api/API';
-import { CastModel } from '../../api/cast/model';
+import { Cast } from '../../api/cast/model';
 
 interface UseSearchCastsResult {
   isSearchingCast: boolean;
-  casts: CastModel[];
+  casts: Cast[];
   totalCasts: number;
   handleShowMoreCasts: () => void;
 }
 
 export const useSearchCasts = (query: string): UseSearchCastsResult => {
-  const [casts, setCasts] = useState<CastModel[]>([]);
+  const [casts, setCasts] = useState<Cast[]>([]);
   const [isSearchingCast, setIsSearchingCast] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [totalCasts, setTotalMovies] = useState<number>(0);

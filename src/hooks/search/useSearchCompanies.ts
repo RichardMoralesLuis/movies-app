@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { API } from '../../api/API';
-import { CompanyModel } from '../../api/companies/models';
+import { Company } from '../../api/companies/models';
 
 interface UseSearchCompaniesResult {
   isSearchingCompanies: boolean;
-  companies: CompanyModel[];
+  companies: Company[];
   totalCompanies: number;
   handleShowMoreCompanies: () => void;
 }
 
 export const useSearchCompanies = (query: string): UseSearchCompaniesResult => {
-  const [companies, setCompanies] = useState<CompanyModel[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [isSearchingCompanies, setIsSearchingCompanies] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [totalCompanies, setTotalCompanies] = useState<number>(0);
