@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from '@emotion/styled';
-import { CastAPI } from '../../api/cast/model';
+import { Cast } from '../../api/cast/model';
 import { CastCarrouselItem } from './CastCarrouselItem';
 
 const Container = styled.div`
@@ -12,12 +12,12 @@ const Container = styled.div`
 `;
 
 interface CastsCarrouselProps {
-  casts: CastAPI[];
+  casts: Cast[];
 }
 
 export const CastsCarrousel: FC<CastsCarrouselProps> = ({ casts = [] }) => {
 
-  const castsToRender: CastAPI[] = casts.length > 10 ? casts.slice(0, 10) : casts;
+  const castsToRender: Cast[] = casts.length > 10 ? casts.slice(0, 10) : casts;
 
   return <Container>
     {castsToRender.map(cast => <CastCarrouselItem cast={cast} key={cast.id}/>)}

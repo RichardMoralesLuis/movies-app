@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { itemListStyle } from './utils';
-import { CompanyModel } from '../../api/companies/models';
+import { Company } from '../../api/companies/models';
 import styled from '@emotion/styled';
 
 const Image = styled.img`
@@ -10,14 +10,14 @@ const Image = styled.img`
 `;
 
 interface CompanyItemProps {
-  company: CompanyModel;
+  company: Company;
 }
 
 export const CompanyItem: FC<CompanyItemProps> = ({ company }) => {
-  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${company.logoPath}`;
+  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${company.logo_path}`;
 
   return <ListItem alignItems="flex-start" style={itemListStyle}>
-    {company.logoPath ?
+    {company.logo_path ?
       <ListItemAvatar>
         <Image src={imagePath}/>
       </ListItemAvatar>

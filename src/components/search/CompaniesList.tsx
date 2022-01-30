@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Button, List } from '@mui/material';
-import { CompanyModel } from '../../api/companies/models';
+import { Company } from '../../api/companies/models';
 import { CompanyItem } from './CompanyItem';
 import { LIST_STYLE, MORE_RESULTS_BUTTON_STYLE } from '../movies/styles';
 import { EmptyResults } from './EmptyResults';
 
 interface CastListProps {
-  companiesList: CompanyModel[];
+  companiesList: Company[];
   onShowMoreCompanies: () => void;
 }
 

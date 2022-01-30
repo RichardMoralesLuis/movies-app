@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SimpleMovieApiModel } from '../../api/movies/models';
 import { ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
-import { DEFAULT_IMAGE_PATH } from './Movie';
+import { DEFAULT_IMAGE_PATH } from './MovieCarrouselItem';
 import styled from '@emotion/styled';
 import { itemListStyle } from '../search/utils';
 import { useNavigate } from 'react-router-dom';

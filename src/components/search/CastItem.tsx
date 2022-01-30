@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import styled from '@emotion/styled';
-import { CastModel } from '../../api/cast/model';
-import { DEFAULT_IMAGE_PATH } from '../movies/Movie';
+import { Cast } from '../../api/cast/model';
+import { DEFAULT_IMAGE_PATH } from '../movies/MovieCarrouselItem';
 import { itemListStyle } from './utils';
 
 const Image = styled.img`
@@ -11,12 +11,12 @@ const Image = styled.img`
 `;
 
 interface MovieResultProps {
-  cast: CastModel;
+  cast: Cast;
 }
 
 export const CastItem: FC<MovieResultProps> = ({ cast }) => {
-  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${cast.profilePath}`;
-  const source = cast.profilePath ? imagePath : DEFAULT_IMAGE_PATH;
+  const imagePath = `${process.env.REACT_APP_MOVIEDB_IMAGE_URL}${cast.profile_path}`;
+  const source = cast.profile_path ? imagePath : DEFAULT_IMAGE_PATH;
 
   return <ListItem alignItems="flex-start" style={itemListStyle}>
     <ListItemAvatar>

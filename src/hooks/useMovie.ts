@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { MovieDetailModel } from '../api/movies/models';
 import { API } from '../api/API';
-import { CastAPI } from '../api/cast/model';
+import { Cast } from '../api/cast/model';
 
 interface UseMovieResult {
   movie?: MovieDetailModel;
   isLoadingMovie: boolean;
-  movieCasts: CastAPI[];
+  movieCasts: Cast[];
   movieError: boolean;
   handleCloseMovieError: () => void;
 }
 
 export const useMovie = (id: number): UseMovieResult => {
   const [movie, setMovie] = useState<MovieDetailModel>();
-  const [movieCasts, setMovieCasts] = useState<CastAPI[]>([]);
+  const [movieCasts, setMovieCasts] = useState<Cast[]>([]);
   const [isLoadingMovie, setIsLoadingMovie] = useState<boolean>(true);
   const [movieError, setMovieError] = useState<boolean>(false);
 

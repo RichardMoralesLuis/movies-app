@@ -1,6 +1,6 @@
-import { CompanyModel } from '../companies/models';
+import { Company } from '../companies/models';
 import { Genre } from '../genres/models';
-import { CastAPI } from '../cast/model';
+import { Cast } from '../cast/model';
 
 export interface MoviesApiResponse {
   results: SimpleMovieApiModel[];
@@ -30,7 +30,7 @@ export interface MovieDetailModel {
   status: string;
   release_date: string;
   revenue: number;
-  production_companies: CompanyModel[];
+  production_companies: Company[];
   budget: number;
   vote_average: number;
 }
@@ -43,7 +43,7 @@ export interface MoviesResult {
 
 export interface CreditsResponse {
   id: number;
-  cast: CastAPI[];
+  cast: Cast[];
 }
 
 export interface Video {

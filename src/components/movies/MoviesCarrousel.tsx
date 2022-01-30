@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import { SimpleMovieApiModel } from '../../api/movies/models';
 import styled from '@emotion/styled';
-import { Movie } from './Movie';
+import { MovieCarrouselItem } from './MovieCarrouselItem';
 
 const Container = styled.div`
   padding: 22px;
@@ -27,6 +27,6 @@ export const MoviesCarrousel: FC<MoviesProps> = ({ movies, onUpdateMovies }) => 
   };
 
   return <Container ref={scrollRef} onScroll={handleScroll}>
-    {movies.map(movie => <Movie movie={movie} key={movie.id}/>)}
+    {movies.map(movie => <MovieCarrouselItem movie={movie} key={movie.id}/>)}
   </Container>;
 };

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Button, List } from '@mui/material';
-import { CastModel } from '../../api/cast/model';
+import { Cast } from '../../api/cast/model';
 import { CastItem } from './CastItem';
 import { LIST_STYLE, MORE_RESULTS_BUTTON_STYLE } from '../movies/styles';
 import { EmptyResults } from './EmptyResults';
 
 interface CastListProps {
-  casts: CastModel[];
+  casts: Cast[];
   onShowMoreCasts: () => void;
 }
 
